@@ -91,7 +91,7 @@ function MotorMusicEditor(props) {
     function consumeText(newCode) {
         setCode(newCode);
         const [colorMap, getAnimationInfoFunction, computedAudio, errors] = process(newCode, syllableTime);
-        if (errors.length === 0 && getAnimationInfoFunction && computedaudio && colorMap) {
+        if (errors.length === 0 && getAnimationInfoFunction && computedAudio && colorMap) {
             setComputedAudio(computedAudio);
             setGetAnimationInfoFunction(getanimationInfoFunction);
             repaintColors(editorRef.current, document, colorMap);
