@@ -88,7 +88,7 @@ function registerLanguageAndTheme(monaco) {
 function MotorMusicEditor(props) {
     const editorRef = useRef(null);
     const currentColorMap = useRef(); //TODO: understand why there is no null here (any difference?)
-    const [code, setCode] = useState(props.initialCode | DEFAULT_CODE);
+    const [code, setCode] = useState(props.initialCode || DEFAULT_CODE);
     const [syllableTime, setSyllableTime] = useState(DEFAULT_SYLLABLE_TIME);
     const [isCurrentCodeCompiled, setIsCurrentCodeCompiled] = useState(false);
 
