@@ -142,7 +142,7 @@ function MotorMusicEditor(props) {
         {/* We will add syllable time slider here in step 2 */}
       </div>
       <button
-        disabled={!isCompiled || areWeCurrentlyPlayingBack}
+        disabled={!isCurrentCodeCompiled || areWeCurrentlyPlayingBack}
         onClick={runCode}
         style={{ marginTop: 10 }}
       >
