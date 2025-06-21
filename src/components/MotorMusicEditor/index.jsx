@@ -1,11 +1,11 @@
 import React, {useState, useEffect, useRef} from "react";
-import MonacoEditor, { monaco } from "@monaco-editor/react";
+import MonacoEditor from "@monaco-editor/react";
 import {process, beginNewPlayback, initializeAudioRuntime, setComputedAudio,
         setGetAnimationInfoFunction, setSyllableTime, repaintColors, 
         initiateAnimation, areWeCurrentlyPlayingBack, DEFAULT_SYLLABLE_TIME} from  "motormusic-runtime";
 import * as MotorMusicTokensProvider from "motormusic-runtime";
 
-function registerLanguageAndTheme() {
+function registerLanguageAndTheme(monaco) {
     monaco.languages.register({id: "MotorMusic"});
     monaco.languages.setTokensProvider('MotorMusic', new MotorMusicTokensProvider.MotorMusicTokensProvider());
     
@@ -131,8 +131,9 @@ function MotorMusicEditor(props) {
           scrollBeyondLastLine: false,
           smoothScrolling: false
         }}
-        onMount={(editor) => {
+        onMount={(editor, monaco) => {
           editorRef.current = editor;
+          registerLanguageAndTheme(monaco);
           consumeText(code);
         }}
         onChange={consumeText}
