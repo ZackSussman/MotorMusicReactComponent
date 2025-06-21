@@ -6,6 +6,10 @@ import {process, beginNewPlayback, initializeAudioRuntime, setComputedAudio,
 import * as MotorMusicTokensProvider from "motormusic-runtime";
 
 function registerLanguageAndTheme(monaco) {
+    if (!monaco) {
+      console.error("Monaco is undefined in registerLanguageAndTheme");
+      return;
+    }
     monaco.languages.register({id: "MotorMusic"});
     monaco.languages.setTokensProvider('MotorMusic', new MotorMusicTokensProvider.MotorMusicTokensProvider());
     
