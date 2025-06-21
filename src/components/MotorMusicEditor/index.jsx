@@ -80,6 +80,7 @@ function MotorMusicEditor(props) {
     useEffect(() => {
         loader.init().then(monaco => {
           registerLanguageAndTheme(monaco);
+          consumeText(code);
         }).catch(error => {
           console.log("failed to initialize monaco: ", error);
         });
@@ -141,7 +142,6 @@ function MotorMusicEditor(props) {
         }}
         onMount={(editor) => {
           editorRef.current = editor;
-          consumeText(code);
         }}
         onChange={consumeText}
       />
