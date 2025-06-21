@@ -130,6 +130,8 @@ function MotorMusicEditor(props) {
         language="MotorMusic"
         value={code}
         theme="MotorMusicTheme"
+        height="100%"
+        width="100%"
         options={{
           overviewRulerLanes: 0,
           automaticLayout: true,
