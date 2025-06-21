@@ -105,6 +105,7 @@ function MotorMusicEditor(props) {
 
     function consumeText(newCode) {
         setCode(newCode);
+        console.log("about to process: " + newCode);
         const [colorMap, getAnimationInfoFunction, computedAudio, errors] = process(newCode, syllableTime);
         if (errors.length === 0 && getAnimationInfoFunction && computedAudio && colorMap) {
             setComputedAudio(computedAudio);
