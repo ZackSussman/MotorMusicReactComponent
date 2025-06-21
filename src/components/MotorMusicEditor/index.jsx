@@ -3,7 +3,7 @@ import MonacoEditor, {loader} from "@monaco-editor/react";
 import {process, beginNewPlayback, initializeAudioRuntime, setComputedAudio,
         setGetAnimationInfoFunction, setSyllableTime, repaintColors, 
         initiateAnimation, areWeCurrentlyPlayingBack, DEFAULT_SYLLABLE_TIME} from  "motormusic-runtime";
-import * as MotorMusicTokensProvider from "motormusic-runtime";
+import {MotorMusicTokensProvider} from "motormusic-runtime";
 
 function registerLanguageAndTheme(monaco) {
     if (!monaco) {
