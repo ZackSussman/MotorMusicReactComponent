@@ -159,6 +159,7 @@ function MotorMusicEditor(props) {
         }}
         onMount={(editor) => {
           editorRef.current = editor;
+          console.log("editor ref.current has been set during mount to " + editorRef.current);
         }}
         onChange={consumeText}
       />
