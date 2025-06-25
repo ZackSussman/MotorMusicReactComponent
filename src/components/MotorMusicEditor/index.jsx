@@ -144,7 +144,7 @@ function MotorMusicEditor(props) {
         language="MotorMusic"
         value={code}
         theme="MotorMusicTheme"
-        height="100%"
+        height="500px"
         width="100%"
         options={{
           overviewRulerLanes: 0,
