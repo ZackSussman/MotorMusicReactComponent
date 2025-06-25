@@ -139,7 +139,7 @@ function MotorMusicEditor(props) {
     }
 
     return (
- <div style={({height: '100%'})}>
+ <div style={{height: '100vh', width: '100vw'}}>
       <MonacoEditor
         language="MotorMusic"
         value={code}
