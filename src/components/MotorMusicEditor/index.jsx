@@ -209,7 +209,8 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
                   outline: 'none',
                   boxShadow: 'none',
                   alignItems: 'center',
-                  justifyContent: 'center' }}
+                  justifyContent: 'center',
+                  borderRadius: 0  }}
       >
         <FaPlay/>
       </button>
