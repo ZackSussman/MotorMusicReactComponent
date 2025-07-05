@@ -85,7 +85,7 @@ function registerLanguageAndTheme(monaco) {
 }
 
 
-function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width = '600px'}) {
+function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width = '600px', lineNumbers = "on"}) {
     const editorRef = useRef(null);
     const currentColorMap = useRef(); //TODO: understand why there is no null here (any difference?)
     const [code, setCode] = useState(initialCode);
@@ -160,6 +160,7 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
         theme="MotorMusicTheme"
         height={height}
         width={width}
+        lineNumbers={lineNumbers}
         options={{
           overviewRulerLanes: 0,
           automaticLayout: true,
