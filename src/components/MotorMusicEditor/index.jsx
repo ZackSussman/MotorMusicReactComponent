@@ -171,7 +171,7 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
           smoothScrolling: false,
           glyphMargin: false,
           folding: false,
-          lineDecorationsWidth: 0,
+          lineDecorationsWidth: 3,
           lineNumbers: lineNumbers,
           lineNumbersMinChars: 0,
           renderLineHighlight: 'none',
