@@ -139,7 +139,7 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
     }
 
     return (
- <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+ <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'cetner', height: '100%', width: '100%'}}>
       <MonacoEditor
         language="MotorMusic"
         value={code}
