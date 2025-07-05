@@ -145,11 +145,15 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
             alignItems: 'center', 
             justifyContent: 'cetner', 
             height: '100%',
-            width: '100%',
-            border: '1px solid #ccc',
-            borderRadius: '3px',
-            boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-            overflow: 'hidden'}}>
+            width: '100%'}}>
+    <div style = {{
+        height,
+        width,
+        border: '1px solid #ccc',
+        borderRadius: '3px',
+        boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+        overflow: 'hidden',
+      }}>
       <MonacoEditor
         language="MotorMusic"
         value={code}
@@ -190,6 +194,7 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
       >
         Run
       </button>
+      </div>
       </div>
     </div>
     );
