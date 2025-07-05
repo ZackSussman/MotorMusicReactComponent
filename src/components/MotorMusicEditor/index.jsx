@@ -85,7 +85,7 @@ function registerLanguageAndTheme(monaco) {
 }
 
 
-function MotorMusicEditor(props) {
+function MotorMusicEditor({initialCode, height = '100px', width = '600px'}) {
     const editorRef = useRef(null);
     const currentColorMap = useRef(); //TODO: understand why there is no null here (any difference?)
     const [code, setCode] = useState(props.initialCode || DEFAULT_CODE);
@@ -139,13 +139,13 @@ function MotorMusicEditor(props) {
     }
 
     return (
- <div style={{height: '100vh', width: '100vw'}}>
+ <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
       <MonacoEditor
         language="MotorMusic"
         value={code}
         theme="MotorMusicTheme"
-        height="500px"
-        width="100%"
+        height={height}
+        width={width}
         options={{
           overviewRulerLanes: 0,
           automaticLayout: true,
@@ -162,9 +162,7 @@ function MotorMusicEditor(props) {
         }}
         onChange={consumeText}
       />
-      <div id="slider-container" style={{ marginTop: 10 }}>
-        {/* We will add syllable time slider here in step 2 */}
-      </div>
+      <div style={{marginTop: 10}}>
       <button
         disabled={!isCurrentCodeCompiled || areWeCurrentlyPlayingBack}
         onClick={runCode}
@@ -172,6 +170,7 @@ function MotorMusicEditor(props) {
       >
         Run
       </button>
+      </div>
     </div>
     );
 
