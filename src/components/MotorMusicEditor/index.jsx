@@ -181,7 +181,7 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
           },
           automaticLayout: true,
           padding: {
-            top: "6px"
+            top: "4px"
           }
         }}
         onMount={(editor) => {
