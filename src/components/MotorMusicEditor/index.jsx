@@ -201,7 +201,7 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
         style={{  backgroundColor: EDITOR_BACKGROUND_COLOR,
                   border: 'none',
                   height: height,
-                  padding: '0 12px',
+                 // padding: '0 12px',
                   fontSize: '18px',
                   cursor: 'pointer',
                   display: 'flex',
