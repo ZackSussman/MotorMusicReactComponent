@@ -192,9 +192,11 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
         onMount={(editor) => {
           editorRef.current = editor;
           consumeText(code);
-          editor.addCommand(monaco.KeyCode.Enter, () => {
-            // Do nothing on Enter key — disables new line
-          });
+          if (lineNumbers == "off") {
+            editor.addCommand(monaco.KeyCode.Enter, () => {
+              // Do nothing on Enter key — disables new line
+            });
+          }
         }}
         onChange={consumeText}
       />
