@@ -166,14 +166,14 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
           },
           automaticLayout: true
         }}
-        wrapperProps={{
+        /*wrapperProps={{
           style: {
             border: '1px solid #ccc',
             borderRadius: '8px',
             boxShadow:  '0 4px 12px rgba(0,0,0,0.1)',
             overflow: 'hidden'
           }
-        }}
+        }}*/
         onMount={(editor) => {
           editorRef.current = editor;
           consumeText(code);
