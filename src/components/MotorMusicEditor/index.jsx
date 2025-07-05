@@ -160,7 +160,6 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
         theme="MotorMusicTheme"
         height={height}
         width={width}
-        lineNumbers={lineNumbers}
         options={{
           overviewRulerLanes: 0,
           automaticLayout: true,
@@ -173,6 +172,7 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
           glyphMargin: false,
           folding: false,
           lineDecorationsWidth: 0,
+          lineNumbers: lineNumbers,
           lineNumbersMinChars: 0,
           renderLineHighlight: 'none',
           scrollbar: {
