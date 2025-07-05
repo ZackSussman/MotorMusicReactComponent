@@ -146,7 +146,7 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
             flexDirection: 'column', 
             alignItems: 'center', 
             justifyContent: 'cetner', 
-            height: '100%',
+            height: height,
             width: '100%'}}>
     <div style = {{
         height: height,
