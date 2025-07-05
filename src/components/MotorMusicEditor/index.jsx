@@ -158,12 +158,13 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
         display: 'flex',
         alignItems: 'center'
       }}>
-        <div style = {{flexGrow: 1}} >
+        <div style = {{flex: 1}} >
       <MonacoEditor
         language="MotorMusic"
         value={code}
         theme="MotorMusicTheme"
         height={height}
+        width="100%"
         options={{
           overviewRulerLanes: 0,
           automaticLayout: true,
@@ -201,7 +202,7 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
         style={{  backgroundColor: EDITOR_BACKGROUND_COLOR,
                   border: 'none',
                   height: height,
-                 // padding: '0 12px',
+                  padding: '0 12px',
                   fontSize: '18px',
                   cursor: 'pointer',
                   display: 'flex',
