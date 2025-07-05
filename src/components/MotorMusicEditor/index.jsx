@@ -206,6 +206,7 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
                   cursor: 'pointer',
                   display: 'flex',
                   outline: 'none',
+                  boxShadow: 'none',
                   alignItems: 'center',
                   justifyContent: 'center',
                   borderLeft: '1px solid #ccc'  }}
