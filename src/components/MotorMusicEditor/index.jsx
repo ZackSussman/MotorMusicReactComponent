@@ -186,15 +186,15 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
         }}
         onChange={consumeText}
       />
-      <div style={{marginTop: 10}}>
-      <button
+      <div style={{marginTop: 10}}>s
+      </div>
+        <button
         disabled={!isCurrentCodeCompiled || areWeCurrentlyPlayingBack}
         onClick={runCode}
         style={{ marginTop: 5 }}
       >
         Run
       </button>
-      </div>
       </div>
     </div>
     );
