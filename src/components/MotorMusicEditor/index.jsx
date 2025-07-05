@@ -179,7 +179,10 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
             vertical: 'hidden',
             horizontal: 'hidden'
           },
-          automaticLayout: true
+          automaticLayout: true,
+          padding: {
+            top: "6px"
+          }
         }}
         onMount={(editor) => {
           editorRef.current = editor;
