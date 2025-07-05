@@ -4,7 +4,7 @@ import {process, beginNewPlayback, initializeAudioRuntime, setComputedAudio,
         setGetAnimationInfoFunction, setSyllableTime, repaintColors, 
         initiateAnimation, areWeCurrentlyPlayingBack, DEFAULT_SYLLABLE_TIME} from  "motormusic-runtime";
 import {MotorMusicTokensProvider} from "motormusic-runtime";
-
+import {FaPlay} from 'react-icons/fa';
 
 const DEFAULT_CODE = `(
     (
@@ -147,6 +147,7 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
             height: '100%',
             width: '100%'}}>
     <div style = {{
+        flexGrow: 1,
         height,
         width,
         border: '1px solid #ccc',
@@ -190,15 +191,22 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
         }}
         onChange={consumeText}
       />
-      <div style={{marginTop: 10}}>s
       </div>
-      </div>
-        <button
+      <button
         disabled={!isCurrentCodeCompiled || areWeCurrentlyPlayingBack}
         onClick={runCode}
-        style={{ marginTop: 5 }}
+        style={{  backgroundColor: '#f5f5f5',
+                  border: 'none',
+                  height: '100%',
+                  padding: '0 12px',
+                  fontSize: '18px',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  borderLeft: '1px solid #ccc'  }}
       >
-        Run
+        <FaPlay/>
       </button>
     </div>
     );

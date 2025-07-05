@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@monaco-editor/react": "^4.7.0",
-    "motormusic-runtime": "github:ZackSussman/MotorMusicRuntime"
+    "motormusic-runtime": "github:ZackSussman/MotorMusicRuntime",
+    "react-icons": "^5.5.0"
   }
 }
