@@ -20,6 +20,8 @@ const DEFAULT_CODE = `(
     6arr
 )`;
 
+const EDITOR_BACKGROUND_COLOR = "#171617";
+
 function registerLanguageAndTheme(monaco) {
     if (!monaco) {
       console.error("Monaco is undefined in registerLanguageAndTheme");
@@ -32,7 +34,7 @@ function registerLanguageAndTheme(monaco) {
     base: 'vs',
     inherit: false,
     colors: {
-      "editor.background": '#171617',
+      "editor.background": EDITOR_BACKGROUND_COLOR,
       "editor.lineHighlightBorder": '#424242',
       "editorLineNumber.foreground": "#00ffe0",
       "editorLineNumber.activeForeground": '#0bf098',
@@ -147,9 +149,9 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
             height: '100%',
             width: '100%'}}>
     <div style = {{
-        flexGrow: 1,
         height,
         width,
+        flexGrow: 1,
         border: '1px solid #ccc',
         borderRadius: '3px',
         boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
@@ -196,7 +198,7 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
        <button
         disabled={!isCurrentCodeCompiled || areWeCurrentlyPlayingBack}
         onClick={runCode}
-        style={{  backgroundColor: '#f5f5f5',
+        style={{  backgroundColor: EDITOR_BACKGROUND_COLOR,
                   border: 'none',
                   height: '100%',
                   padding: '0 12px',
