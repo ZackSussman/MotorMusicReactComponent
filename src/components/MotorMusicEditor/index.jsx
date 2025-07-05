@@ -149,8 +149,8 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
             height: '100%',
             width: '100%'}}>
     <div style = {{
-        height,
-        width,
+        height: height,
+        width: width,
         flexGrow: 1,
         border: '1px solid #ccc',
         borderRadius: '3px',
