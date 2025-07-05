@@ -154,7 +154,25 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
           matchBrackets: "near",
           bracketPairColorization: { enabled: false },
           scrollBeyondLastLine: false,
-          smoothScrolling: false
+          smoothScrolling: false,
+          glyphMargin: false,
+          folding: false,
+          lineDecorationsWidth: 0,
+          lineNumbersMinChars: 0,
+          renderLineHighlight: 'none',
+          scrollbar: {
+            vertical: 'hidden',
+            horizontal: 'hidden'
+          },
+          automaticLayout: true
+        }}
+        wrapperProps={{
+          style: {
+            border: '1px solid #ccc',
+            borderRadius: '8px',
+            boxShadow:  '0 4px 12px rgba(0,0,0,0.1)',
+            overflow: 'hidden'
+          }
         }}
         onMount={(editor) => {
           editorRef.current = editor;
