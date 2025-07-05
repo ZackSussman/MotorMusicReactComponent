@@ -139,7 +139,17 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
     }
 
     return (
- <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'cetner', height: '100%', width: '100%'}}>
+ <div style={{
+            display: 'flex', 
+            flexDirection: 'column', 
+            alignItems: 'center', 
+            justifyContent: 'cetner', 
+            height: '100%',
+            width: '100%',
+            border: '1px solid #ccc',
+            borderRadius: '3px',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+            overflow: 'hidden',}}>
       <MonacoEditor
         language="MotorMusic"
         value={code}
@@ -165,15 +175,6 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
             horizontal: 'hidden'
           },
           automaticLayout: true
-        }}
-        wrapperProps={{
-          style: {
-            border: '1px solid #ccc',
-            borderRadius: '3px',
-            boxShadow:  '0 4px 12px rgba(0,0,0,0.1)',
-            height: height,
-            width: width
-          }
         }}
         onMount={(editor) => {
           editorRef.current = editor;
