@@ -158,7 +158,7 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
         display: 'flex',
         alignItems: 'center'
       }}>
-      <div style = {{flexGrow: 1}}>
+        <div style = {{flexGrow: 1}} >
       <MonacoEditor
         language="MotorMusic"
         value={code}
@@ -195,7 +195,7 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
         }}
         onChange={consumeText}
       />
-      <div/>
+      </div>
        <button
         disabled={!isCurrentCodeCompiled || areWeCurrentlyPlayingBack}
         onClick={runCode}
@@ -206,9 +206,9 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
                   fontSize: '18px',
                   cursor: 'pointer',
                   display: 'flex',
+                  outline: 'none',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  outline: 'none',
                   borderLeft: '1px solid #ccc'  }}
       >
         <FaPlay/>
