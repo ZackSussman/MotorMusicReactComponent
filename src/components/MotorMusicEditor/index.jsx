@@ -164,7 +164,6 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
         value={code}
         theme="MotorMusicTheme"
         height={height}
-        width={width}
         options={{
           overviewRulerLanes: 0,
           automaticLayout: true,
