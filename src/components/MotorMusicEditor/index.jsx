@@ -184,7 +184,7 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
       <button
         disabled={!isCurrentCodeCompiled || areWeCurrentlyPlayingBack}
         onClick={runCode}
-        style={{ marginTop: 10 }}
+        style={{ marginTop: 5 }}
       >
         Run
       </button>
