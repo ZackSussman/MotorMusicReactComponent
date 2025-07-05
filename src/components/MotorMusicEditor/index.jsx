@@ -171,7 +171,6 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
             border: '1px solid #ccc',
             borderRadius: '3px',
             boxShadow:  '0 4px 12px rgba(0,0,0,0.1)',
-            overflow: 'hidden',
             height: height,
             width: width
           }
