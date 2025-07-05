@@ -169,7 +169,7 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
           bracketPairColorization: { enabled: false },
           scrollBeyondLastLine: false,
           smoothScrolling: false,
-          glyphMargin: true,
+          glyphMargin: false,
           folding: false,
           lineDecorationsWidth: 0,
           lineNumbers: lineNumbers,
