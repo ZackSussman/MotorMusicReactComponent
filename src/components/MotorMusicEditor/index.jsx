@@ -100,7 +100,7 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
         }).catch(error => {
           console.log("failed to initialize monaco: ", error);
         });
-        mmRuntime.audioRuntime.initializeAudioRuntime();
+        mmRuntime.audioRuntime.initializeAudioContext();
         mmRuntime.animationRuntime.setSyllableTime(syllableTime);
      }, []);
 
