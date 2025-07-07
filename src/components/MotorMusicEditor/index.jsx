@@ -134,7 +134,7 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
     }
 
     async function runCode() {
-        if (isCurrentCodeCompiled && !areWeCurrentlyPlayingBack) {
+        if (isCurrentCodeCompiled && !mmRuntime.current.areWeCurrentlyPlayingBack) {
             const audioStartTime = await mmRuntime.current.audioRuntime.beginNewPlayback();
             mmRuntime.current.animationRuntime.initiateAnimation(editorRef.current, document, currentColorMap.current, audioStartTime);
         }
@@ -202,7 +202,7 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
       />
       </div>
        <button
-        disabled={!isCurrentCodeCompiled || areWeCurrentlyPlayingBack}
+        disabled={!isCurrentCodeCompiled || mmRuntime.current.areWeCurrentlyPlayingBack}
         onClick={runCode}
         style={{  backgroundColor: EDITOR_BACKGROUND_COLOR,
                   border: 'none',
