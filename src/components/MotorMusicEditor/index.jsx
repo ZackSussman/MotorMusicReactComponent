@@ -1,8 +1,6 @@
 import React, {useState, useEffect, useRef} from "react";
 import MonacoEditor, {loader} from "@monaco-editor/react";
-import {process, beginNewPlayback, initializeAudioRuntime, setComputedAudio,
-        setGetAnimationInfoFunction, setSyllableTime, repaintColors, 
-        initiateAnimation, areWeCurrentlyPlayingBack, DEFAULT_SYLLABLE_TIME} from  "motormusic-runtime";
+import {initializeMotorMusicRuntime, DEFAULT_SYLLABLE_TIME, process} from  "motormusic-runtime";
 import {MotorMusicTokensProvider} from "motormusic-runtime";
 import {FaPlay} from 'react-icons/fa';
 
@@ -88,6 +86,8 @@ function registerLanguageAndTheme(monaco) {
 
 
 function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width = '600px', lineNumbers = "on"}) {
+    const mmRuntime = useRef(initializeMotorMusicRuntime());
+
     const editorRef = useRef(null);
     const currentColorMap = useRef(); //TODO: understand why there is no null here (any difference?)
     const [code, setCode] = useState(initialCode);
@@ -100,17 +100,17 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
         }).catch(error => {
           console.log("failed to initialize monaco: ", error);
         });
-        initializeAudioRuntime();
-        setSyllableTime(syllableTime);
+        mmRuntime.audioRuntime.initializeAudioRuntime();
+        mmRuntime.animationRuntime.setSyllableTime(syllableTime);
      }, []);
 
     function consumeText(newCode) {
         setCode(newCode);
         const [colorMap, getAnimationInfoFunction, computedAudio, errors] = process(newCode, syllableTime);
         if (errors.length === 0 && getAnimationInfoFunction && computedAudio && colorMap) {
-            setComputedAudio(computedAudio);
-            setGetAnimationInfoFunction(getAnimationInfoFunction);
-            repaintColors(editorRef.current, document, colorMap);
+            mmRuntime.audioRuntime.setComputedAudio(computedAudio);
+            mmRuntime.animationRuntime.setGetAnimationInfoFunction(getAnimationInfoFunction);
+            mmRuntime.animationRuntime.repaintColors(editorRef.current, document, colorMap);
             currentColorMap.current = colorMap;
             setIsCurrentCodeCompiled(true);
         }
@@ -135,8 +135,8 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
 
     async function runCode() {
         if (isCurrentCodeCompiled && !areWeCurrentlyPlayingBack) {
-            const audioStartTime = await beginNewPlayback();
-            initiateAnimation(editorRef.current, document, currentColorMap.current, audioStartTime);
+            const audioStartTime = await mmRuntime.audioRuntime.beginNewPlayback();
+            mmRuntime.animationRuntime.initiateAnimation(editorRef.current, document, currentColorMap.current, audioStartTime);
         }
     }
 
