@@ -100,17 +100,17 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
         }).catch(error => {
           console.log("failed to initialize monaco: ", error);
         });
-        mmRuntime.audioRuntime.initializeAudioContext();
-        mmRuntime.animationRuntime.setSyllableTime(syllableTime);
+        mmRuntime.current.audioRuntime.initializeAudioContext();
+        mmRuntime.current.animationRuntime.setSyllableTime(syllableTime);
      }, []);
 
     function consumeText(newCode) {
         setCode(newCode);
         const [colorMap, getAnimationInfoFunction, computedAudio, errors] = process(newCode, syllableTime);
         if (errors.length === 0 && getAnimationInfoFunction && computedAudio && colorMap) {
-            mmRuntime.audioRuntime.setComputedAudio(computedAudio);
-            mmRuntime.animationRuntime.setGetAnimationInfoFunction(getAnimationInfoFunction);
-            mmRuntime.animationRuntime.repaintColors(editorRef.current, document, colorMap);
+            mmRuntime.current.audioRuntime.setComputedAudio(computedAudio);
+            mmRuntime.current.animationRuntime.setGetAnimationInfoFunction(getAnimationInfoFunction);
+            mmRuntime.current.animationRuntime.repaintColors(editorRef.current, document, colorMap);
             currentColorMap.current = colorMap;
             setIsCurrentCodeCompiled(true);
         }
@@ -135,8 +135,8 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
 
     async function runCode() {
         if (isCurrentCodeCompiled && !areWeCurrentlyPlayingBack) {
-            const audioStartTime = await mmRuntime.audioRuntime.beginNewPlayback();
-            mmRuntime.animationRuntime.initiateAnimation(editorRef.current, document, currentColorMap.current, audioStartTime);
+            const audioStartTime = await mmRuntime.current.audioRuntime.beginNewPlayback();
+            mmRuntime.current.animationRuntime.initiateAnimation(editorRef.current, document, currentColorMap.current, audioStartTime);
         }
     }
 
