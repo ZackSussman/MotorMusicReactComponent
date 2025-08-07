@@ -219,9 +219,9 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
         disabled={!isCurrentCodeCompiled || mmRuntime.current.areWeCurrentlyPlayingBack}
         onClick={runCode}
         style={{  backgroundColor: EDITOR_BACKGROUND_COLOR,
-                  color: '#fff',
+                  color: '#fff', // ensure button text/icon is white
                   border: 'none',
-                  height: '100%', // changed from height: height
+                  height: '100%',
                   padding: '0 12px',
                   fontSize: '18px',
                   cursor: 'pointer',
@@ -230,7 +230,9 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
                   boxShadow: 'none',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  borderRadius: 0  }}
+                  borderRadius: 0,
+                  opacity: (!isCurrentCodeCompiled || mmRuntime.current.areWeCurrentlyPlayingBack) ? 0.5 : 1 // visually indicate disabled
+                }}
       >
         <FaPlay/>
       </button>
