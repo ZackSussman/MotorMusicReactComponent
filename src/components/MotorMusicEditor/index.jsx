@@ -178,21 +178,30 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
           smoothScrolling: false,
           glyphMargin: false,
           folding: false,
-          lineDecorationsWidth: 16, // further increase space between border and line numbers
           lineNumbers: lineNumbers,
-          lineNumbersMinChars: 3, // further increase space for two-digit line numbers
           renderLineHighlight: 'none',
           scrollbar: {
             vertical: 'hidden',
             horizontal: 'hidden'
           },
           automaticLayout: true,
-          padding: {
-            top: "4px",
-            bottom: 0,
-            left: 16, // further increase left padding
-            right: 0
-          }
+          ...(lineNumbers !== "off" ? {
+            lineNumbersMinChars: 3, // extra space for two-digit line numbers
+            lineDecorationsWidth: 16, // extra space between border and line numbers
+            padding: {
+              top: "4px",
+              bottom: 0,
+              left: 16,
+              right: 0
+            }
+          } : {
+            padding: {
+              top: "4px",
+              bottom: 0,
+              left: 0,
+              right: 0
+            }
+          })
         }}
         onMount={(editor) => {
           editorRef.current = editor;
