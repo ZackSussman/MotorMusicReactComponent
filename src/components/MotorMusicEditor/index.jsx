@@ -215,26 +215,25 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
         onChange={consumeText}
       />
       </div>
-       <button
+      <button
         disabled={!isCurrentCodeCompiled || mmRuntime.current.areWeCurrentlyPlayingBack}
         onClick={runCode}
-        style={{  backgroundColor: EDITOR_BACKGROUND_COLOR,
-                  color: '#fff', // ensure button text/icon is white
-                  border: 'none',
-                  height: '100%',
-                  padding: '0 12px',
-                  fontSize: '18px',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  outline: 'none',
-                  boxShadow: 'none',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  borderRadius: 0,
-                  opacity: (!isCurrentCodeCompiled || mmRuntime.current.areWeCurrentlyPlayingBack) ? 0.5 : 1 // visually indicate disabled
-                }}
+        style={{
+          backgroundColor: EDITOR_BACKGROUND_COLOR,
+          border: 'none',
+          height: '100%',
+          padding: '0 12px',
+          fontSize: '18px',
+          cursor: (!isCurrentCodeCompiled || mmRuntime.current.areWeCurrentlyPlayingBack) ? 'not-allowed' : 'pointer',
+          display: 'flex',
+          outline: 'none',
+          boxShadow: 'none',
+          alignItems: 'center',
+          justifyContent: 'center',
+          borderRadius: 0
+        }}
       >
-        <FaPlay/>
+        <FaPlay style={{ color: (!isCurrentCodeCompiled || mmRuntime.current.areWeCurrentlyPlayingBack) ? '#888' : '#fff' }} />
       </button>
       </div>
 
