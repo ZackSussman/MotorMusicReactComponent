@@ -178,9 +178,9 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
           smoothScrolling: false,
           glyphMargin: false,
           folding: false,
-          lineDecorationsWidth: 8, // add more space between border and line numbers
+          lineDecorationsWidth: 16, // further increase space between border and line numbers
           lineNumbers: lineNumbers,
-          lineNumbersMinChars: 2, // increase space for line numbers
+          lineNumbersMinChars: 3, // further increase space for two-digit line numbers
           renderLineHighlight: 'none',
           scrollbar: {
             vertical: 'hidden',
@@ -190,7 +190,7 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
           padding: {
             top: "4px",
             bottom: 0,
-            left: 12, // add left padding to prevent border overlap
+            left: 16, // further increase left padding
             right: 0
           }
         }}
