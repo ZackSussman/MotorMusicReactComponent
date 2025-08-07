@@ -205,6 +205,7 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
         disabled={!isCurrentCodeCompiled || mmRuntime.current.areWeCurrentlyPlayingBack}
         onClick={runCode}
         style={{  backgroundColor: EDITOR_BACKGROUND_COLOR,
+                  color: '#fff',
                   border: 'none',
                   height: height,
                   padding: '0 12px',
