@@ -134,7 +134,7 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
     }
 
     async function runCode() {
-        if (isCurrentCodeCompiled && !mmRuntime.current.animationRuntime.areWeCurrentlyPlayingBack) {
+        if (isCurrentCodeCompiled && !mmRuntime.current.animationRuntimeData.areWeCurrentlyPlayingBack) {
             const audioStartTime = await mmRuntime.current.audioRuntime.beginNewPlayback();
             mmRuntime.current.animationRuntime.initiateAnimation(editorRef.current, document, currentColorMap.current, audioStartTime);
         }
@@ -216,7 +216,7 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
       />
       </div>
       <button
-        disabled={!isCurrentCodeCompiled || mmRuntime.current.audioRuntime.areWeCurrentlyPlayingBack}
+        disabled={!isCurrentCodeCompiled || mmRuntime.current.animationRuntimeData.areWeCurrentlyPlayingBack}
         onClick={runCode}
         style={{
           backgroundColor: EDITOR_BACKGROUND_COLOR,
@@ -224,7 +224,7 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
           height: '100%',
           padding: '0 12px',
           fontSize: '18px',
-          cursor: (!isCurrentCodeCompiled || mmRuntime.current.animationRuntime.areWeCurrentlyPlayingBack) ? 'not-allowed' : 'pointer',
+          cursor: (!isCurrentCodeCompiled || mmRuntime.current.animationRuntimeData.areWeCurrentlyPlayingBack) ? 'not-allowed' : 'pointer',
           display: 'flex',
           outline: 'none',
           boxShadow: 'none',
@@ -233,7 +233,7 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
           borderRadius: 0
         }}
       >
-        <FaPlay style={{ color: (!isCurrentCodeCompiled || mmRuntime.current.animationRuntime.areWeCurrentlyPlayingBack) ? '#888' : '#fff' }} />
+        <FaPlay style={{ color: (!isCurrentCodeCompiled || mmRuntime.current.animationRuntimeData.areWeCurrentlyPlayingBack) ? '#888' : '#fff' }} />
       </button>
       </div>
 
