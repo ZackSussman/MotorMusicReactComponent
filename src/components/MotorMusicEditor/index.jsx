@@ -86,13 +86,16 @@ function registerLanguageAndTheme(monaco) {
 
 
 function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width = '600px', lineNumbers = "on"}) {
-    const mmRuntime = useRef(initializeMotorMusicRuntime());
 
     const editorRef = useRef(null);
     const currentColorMap = useRef(); //TODO: understand why there is no null here (any difference?)
     const [code, setCode] = useState(initialCode);
     const [syllableTime, setSyllableTime] = useState(DEFAULT_SYLLABLE_TIME);
     const [isCurrentCodeCompiled, setIsCurrentCodeCompiled] = useState(false);
+    const [areWeCurrentlyPlayingBack, setAreWeCurrentlyPlayingBack] = useState(false);
+
+     const mmRuntime = useRef(initializeMotorMusicRuntime(() => {setAreWeCurrentlyPlayingBack(true)}, () => {setAreWeCurrentlyPlayingBack(false)}));
+
 
     useEffect(() => {
         loader.init().then(monaco => {
@@ -134,7 +137,7 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
     }
 
     async function runCode() {
-        if (isCurrentCodeCompiled && !mmRuntime.current.animationRuntimeData.areWeCurrentlyPlayingBack) {
+        if (isCurrentCodeCompiled && !areWeCurrentlyPlayingBack) {
             const audioStartTime = await mmRuntime.current.audioRuntime.beginNewPlayback();
             mmRuntime.current.animationRuntime.initiateAnimation(editorRef.current, document, currentColorMap.current, audioStartTime);
         }
@@ -216,7 +219,7 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
       />
       </div>
       <button
-        disabled={!isCurrentCodeCompiled || mmRuntime.current.animationRuntimeData.areWeCurrentlyPlayingBack}
+        disabled={!isCurrentCodeCompiled || areWeCurrentlyPlayingBack}
         onClick={runCode}
         style={{
           backgroundColor: EDITOR_BACKGROUND_COLOR,
@@ -224,7 +227,7 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
           height: '100%',
           padding: '0 12px',
           fontSize: '18px',
-          cursor: (!isCurrentCodeCompiled || mmRuntime.current.animationRuntimeData.areWeCurrentlyPlayingBack) ? 'not-allowed' : 'pointer',
+          cursor: (!isCurrentCodeCompiled || areWeCurrentlyPlayingBack) ? 'not-allowed' : 'pointer',
           display: 'flex',
           outline: 'none',
           boxShadow: 'none',
@@ -233,7 +236,7 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
           borderRadius: 0
         }}
       >
-        <FaPlay style={{ color: (!isCurrentCodeCompiled || mmRuntime.current.animationRuntimeData.areWeCurrentlyPlayingBack) ? '#888' : '#fff' }} />
+        <FaPlay style={{ color: (!isCurrentCodeCompiled || areWeCurrentlyPlayingBack) ? '#888' : '#fff' }} />
       </button>
       </div>
 
