@@ -188,6 +188,7 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
             horizontal: 'hidden'
           },
           automaticLayout: true,
+          readOnly: areWeCurrentlyPlayingBack,
           ...(lineNumbers !== "off" ? {
             lineNumbersMinChars: 3, // extra space for two-digit line numbers
             lineDecorationsWidth: 16, // extra space between border and line numbers
