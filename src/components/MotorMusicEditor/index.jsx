@@ -245,29 +245,30 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
             <FaPlay style={{ color: (!isCurrentCodeCompiled || areWeCurrentlyPlayingBack) ? '#888' : '#fff' }} />
           </button>
         </div>
-        <div style={{ width: width, marginTop: 8, display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}>
-          <label htmlFor="dstpm-input" style={{ marginRight: 8, color: '#fff', fontSize: 14 }}>DSTPM:</label>
-          <input
-            id="dstpm-input"
-            type="number"
-            min={1}
-            value={syllableTime}
-            disabled={disableDSTPMInput}
-            onChange={e => setSyllableTime(Number(e.target.value))}
-            style={{
-              width: 80,
-              fontSize: 14,
-              padding: '2px 6px',
-              borderRadius: 3,
-              border: '1px solid #888',
-              background: disableDSTPMInput ? '#222' : '#fff',
-              color: disableDSTPMInput ? '#888' : '#222',
-              outline: 'none',
-              marginRight: 8
-            }}
-          />
-          <span style={{ color: '#aaa', fontSize: 13 }}>(syllable time pulses per minute)</span>
-        </div>
+        { !disableDSTPMInput && (
+          <div style={{ width: width, marginTop: 8, display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}>
+            <label htmlFor="dstpm-input" style={{ marginRight: 8, color: '#fff', fontSize: 14 }}>DSTPM:</label>
+            <input
+              id="dstpm-input"
+              type="number"
+              min={1}
+              value={syllableTime}
+              onChange={e => setSyllableTime(Number(e.target.value))}
+              style={{
+                width: 80,
+                fontSize: 14,
+                padding: '2px 6px',
+                borderRadius: 3,
+                border: '1px solid #888',
+                background: '#fff',
+                color: '#222',
+                outline: 'none',
+                marginRight: 8
+              }}
+            />
+            <span style={{ color: '#aaa', fontSize: 13 }}>(syllable time pulses per minute)</span>
+          </div>
+        )}
       </div>
     );
 
