@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useRef} from "react";
 import MonacoEditor, {loader} from "@monaco-editor/react";
-import {initializeMotorMusicRuntime, DEFAULT_SYLLABLE_TIME, process} from  "motormusic-runtime";
+import {initializeMotorMusicRuntime, DEFAULT_SYLLABLE_TIME} from  "motormusic-runtime";
 import {MotorMusicTokensProvider} from "motormusic-runtime";
 import {FaPlay} from 'react-icons/fa';
 
@@ -114,7 +114,7 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
 
     function consumeText(newCode) {
         setCode(newCode);
-        const [colorMap, getAnimationInfoFunction, computedAudio, errors] = process(newCode, syllableTime);
+        const [colorMap, getAnimationInfoFunction, computedAudio, errors] = mmRuntime.current.globalRuntime.process(newCode);
         if (errors.length === 0 && getAnimationInfoFunction && computedAudio && colorMap) {
             mmRuntime.current.audioRuntime.setComputedAudio(computedAudio);
             mmRuntime.current.animationRuntime.setGetAnimationInfoFunction(getAnimationInfoFunction);
