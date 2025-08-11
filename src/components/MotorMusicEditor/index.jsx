@@ -85,7 +85,7 @@ function registerLanguageAndTheme(monaco) {
 }
 
 
-function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width = '600px', lineNumbers = "on"}) {
+function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width = '600px', lineNumbers = "on", disableDSTPMInput = false}) {
 
     const editorRef = useRef(null);
     const currentColorMap = useRef(); //TODO: understand why there is no null here (any difference?)
@@ -106,6 +106,11 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
         mmRuntime.current.audioRuntime.initializeAudioContext();
         mmRuntime.current.animationRuntime.setSyllableTime(syllableTime);
      }, []);
+
+
+    useEffect(() => {
+        mmRuntime.current.animationRuntime.setSyllableTime(syllableTime);
+    }, [syllableTime]);
 
     function consumeText(newCode) {
         setCode(newCode);
@@ -144,104 +149,126 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
     }
 
     return (
- <div style={{
-            display: 'flex', 
-            flexDirection: 'column', 
-            alignItems: 'center', 
-            justifyContent: 'cetner', 
-            height: height,
-            width: '100%'}}>
-    <div style = {{
-        height: height,
-        width,
-        border: '1px solid #ccc',
-        borderRadius: '3px',
-        boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-        overflow: 'hidden',
+      <div style={{
         display: 'flex',
-        alignItems: 'stretch', // changed from 'center' to 'stretch'
-        gap: 0, // ensure no gap
-        padding: 0, // ensure no padding
-        margin: 0 // ensure no margin
-      }}>
-        <div style = {{flex: 1, minWidth: 0}} >
-      <MonacoEditor
-        language="MotorMusic"
-        value={code}
-        theme="MotorMusicTheme"
-        height={height}
-        options={{
-          overviewRulerLanes: 0,
-          automaticLayout: true,
-          fontSize: 18,
-          minimap: { enabled: false },
-          matchBrackets: "near",
-          bracketPairColorization: { enabled: false },
-          scrollBeyondLastLine: false,
-          smoothScrolling: false,
-          glyphMargin: false,
-          folding: false,
-          lineNumbers: lineNumbers,
-          renderLineHighlight: 'none',
-          scrollbar: {
-            vertical: 'hidden',
-            horizontal: 'hidden'
-          },
-          automaticLayout: true,
-          readOnly: areWeCurrentlyPlayingBack,
-          ...(lineNumbers !== "off" ? {
-            lineNumbersMinChars: 3, // extra space for two-digit line numbers
-            lineDecorationsWidth: 16, // extra space between border and line numbers
-            padding: {
-              top: "4px",
-              bottom: 0,
-              left: 16,
-              right: 0
-            }
-          } : {
-            padding: {
-              top: "4px",
-              bottom: 0,
-              left: 0,
-              right: 0
-            }
-          })
-        }}
-        onMount={(editor) => {
-          editorRef.current = editor;
-          consumeText(code);
-          if (lineNumbers == "off") {
-            editor.addCommand(monaco.KeyCode.Enter, () => {
-              // Do nothing on Enter key — disables new line
-            });
-          }
-        }}
-        onChange={consumeText}
-      />
-      </div>
-      <button
-        disabled={!isCurrentCodeCompiled || areWeCurrentlyPlayingBack}
-        onClick={runCode}
-        style={{
-          backgroundColor: EDITOR_BACKGROUND_COLOR,
-          border: 'none',
-          height: '100%',
-          padding: '0 12px',
-          fontSize: '18px',
-          cursor: (!isCurrentCodeCompiled || areWeCurrentlyPlayingBack) ? 'not-allowed' : 'pointer',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'cetner',
+        height: height,
+        width: '100%'}}>
+        <div style = {{
+          height: height,
+          width,
+          border: '1px solid #ccc',
+          borderRadius: '3px',
+          boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+          overflow: 'hidden',
           display: 'flex',
-          outline: 'none',
-          boxShadow: 'none',
-          alignItems: 'center',
-          justifyContent: 'center',
-          borderRadius: 0
-        }}
-      >
-        <FaPlay style={{ color: (!isCurrentCodeCompiled || areWeCurrentlyPlayingBack) ? '#888' : '#fff' }} />
-      </button>
+          alignItems: 'stretch',
+          gap: 0,
+          padding: 0,
+          margin: 0
+        }}>
+          <div style = {{flex: 1, minWidth: 0}} >
+            <MonacoEditor
+              language="MotorMusic"
+              value={code}
+              theme="MotorMusicTheme"
+              height={height}
+              options={{
+                overviewRulerLanes: 0,
+                automaticLayout: true,
+                fontSize: 18,
+                minimap: { enabled: false },
+                matchBrackets: "near",
+                bracketPairColorization: { enabled: false },
+                scrollBeyondLastLine: false,
+                smoothScrolling: false,
+                glyphMargin: false,
+                folding: false,
+                lineNumbers: lineNumbers,
+                renderLineHighlight: 'none',
+                scrollbar: {
+                  vertical: 'hidden',
+                  horizontal: 'hidden'
+                },
+                automaticLayout: true,
+                readOnly: areWeCurrentlyPlayingBack,
+                ...(lineNumbers !== "off" ? {
+                  lineNumbersMinChars: 3,
+                  lineDecorationsWidth: 16,
+                  padding: {
+                    top: "4px",
+                    bottom: 0,
+                    left: 16,
+                    right: 0
+                  }
+                } : {
+                  padding: {
+                    top: "4px",
+                    bottom: 0,
+                    left: 0,
+                    right: 0
+                  }
+                })
+              }}
+              onMount={(editor) => {
+                editorRef.current = editor;
+                consumeText(code);
+                if (lineNumbers == "off") {
+                  editor.addCommand(monaco.KeyCode.Enter, () => {
+                    // Do nothing on Enter key — disables new line
+                  });
+                }
+              }}
+              onChange={consumeText}
+            />
+          </div>
+          <button
+            disabled={!isCurrentCodeCompiled || areWeCurrentlyPlayingBack}
+            onClick={runCode}
+            style={{
+              backgroundColor: EDITOR_BACKGROUND_COLOR,
+              border: 'none',
+              height: '100%',
+              padding: '0 12px',
+              fontSize: '18px',
+              cursor: (!isCurrentCodeCompiled || areWeCurrentlyPlayingBack) ? 'not-allowed' : 'pointer',
+              display: 'flex',
+              outline: 'none',
+              boxShadow: 'none',
+              alignItems: 'center',
+              justifyContent: 'center',
+              borderRadius: 0
+            }}
+          >
+            <FaPlay style={{ color: (!isCurrentCodeCompiled || areWeCurrentlyPlayingBack) ? '#888' : '#fff' }} />
+          </button>
+        </div>
+        <div style={{ width: width, marginTop: 8, display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}>
+          <label htmlFor="dstpm-input" style={{ marginRight: 8, color: '#fff', fontSize: 14 }}>DSTPM:</label>
+          <input
+            id="dstpm-input"
+            type="number"
+            min={1}
+            value={syllableTime}
+            disabled={disableDSTPMInput}
+            onChange={e => setSyllableTime(Number(e.target.value))}
+            style={{
+              width: 80,
+              fontSize: 14,
+              padding: '2px 6px',
+              borderRadius: 3,
+              border: '1px solid #888',
+              background: disableDSTPMInput ? '#222' : '#fff',
+              color: disableDSTPMInput ? '#888' : '#222',
+              outline: 'none',
+              marginRight: 8
+            }}
+          />
+          <span style={{ color: '#aaa', fontSize: 13 }}>(syllable time pulses per minute)</span>
+        </div>
       </div>
-
-    </div>
     );
 
 }
