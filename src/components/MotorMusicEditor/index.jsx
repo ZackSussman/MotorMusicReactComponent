@@ -307,7 +307,7 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
                   }}
                   role="tooltip"
                 >
-                  Default syllable time pulses per minute. Controls the timing for syllable animation and playback.
+                  Default syllable time in milliseconds
                 </span>
               </span>
             </label>
