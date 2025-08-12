@@ -197,6 +197,7 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
                 folding: false,
                 lineNumbers: lineNumbers,
                 renderLineHighlight: 'none',
+                stickyScroll: { enabled: false },
                 scrollbar: {
                   vertical: 'auto',
                   horizontal: 'hidden',
