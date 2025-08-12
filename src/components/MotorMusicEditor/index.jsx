@@ -111,7 +111,10 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
 
 
     useEffect(() => {
+        console.log("syllableTime changed: ", syllableTime);
+    
         if (isEditorReady) {
+            console.log("editor was ready, making the changes");
             mmRuntime.current.animationRuntime.setSyllableTime(syllableTime);
             consumeText(code);
         }
