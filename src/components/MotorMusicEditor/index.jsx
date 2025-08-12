@@ -259,7 +259,60 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
         </div>
         { !disableDSTPMInput && (
           <div style={{ width: width, marginTop: 8, display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}>
-            <label htmlFor="dstpm-input" style={{ marginRight: 8, color: '#fff', fontSize: 14 }}>DSTPM:</label>
+            <label htmlFor="dstpm-input" style={{ marginRight: 8, color: '#fff', fontSize: 14, display: 'flex', alignItems: 'center' }}>
+              DSTPM:
+              <span style={{ position: 'relative', display: 'inline-block', marginLeft: 6 }}>
+                <span
+                  tabIndex={0}
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    width: 16,
+                    height: 16,
+                    borderRadius: '50%',
+                    background: '#23232b',
+                    color: '#00ffe0',
+                    fontWeight: 700,
+                    fontSize: 13,
+                    border: '1.2px solid #00ffe0',
+                    cursor: 'pointer',
+                    marginLeft: 2,
+                    outline: 'none',
+                  }}
+                  onFocus={e => e.target.nextSibling.style.visibility = 'visible'}
+                  onBlur={e => e.target.nextSibling.style.visibility = 'hidden'}
+                  onMouseEnter={e => e.target.nextSibling.style.visibility = 'visible'}
+                  onMouseLeave={e => e.target.nextSibling.style.visibility = 'hidden'}
+                  aria-label="What is DSTPM?"
+                >
+                  ?
+                </span>
+                <span
+                  style={{
+                    visibility: 'hidden',
+                    width: 220,
+                    background: '#23232b',
+                    color: '#fff',
+                    textAlign: 'left',
+                    borderRadius: 6,
+                    padding: '8px 12px',
+                    position: 'absolute',
+                    zIndex: 10,
+                    left: '110%',
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    boxShadow: '0 2px 8px rgba(0,0,0,0.18)',
+                    fontSize: 13,
+                    fontWeight: 400,
+                    pointerEvents: 'none',
+                  }}
+                  role="tooltip"
+                >
+                  Default syllable time pulses per minute. Controls the timing for syllable animation and playback.
+                </span>
+              </span>
+            </label>
             <input
               id="dstpm-input"
               type="number"
@@ -314,7 +367,7 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
                 -moz-appearance: textfield;
               }
             `}</style>
-            <span style={{ color: '#aaa', fontSize: 13 }}>(syllable time pulses per minute)</span>
+            {/* Tooltip replaced by question mark icon above */}
           </div>
         )}
       </div>
