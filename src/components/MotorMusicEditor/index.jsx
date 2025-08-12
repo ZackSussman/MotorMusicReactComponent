@@ -93,6 +93,7 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
     const [syllableTime, setSyllableTime] = useState(DEFAULT_SYLLABLE_TIME);
     const [isCurrentCodeCompiled, setIsCurrentCodeCompiled] = useState(false);
     const [areWeCurrentlyPlayingBack, setAreWeCurrentlyPlayingBack] = useState(false);
+    const [isEditorReady, setIsEditorReady] = useState(false);
 
      const mmRuntime = useRef(initializeMotorMusicRuntime(() => {setAreWeCurrentlyPlayingBack(true)}, () => {setAreWeCurrentlyPlayingBack(false)}));
 
@@ -108,10 +109,13 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
      }, []);
 
 
+
     useEffect(() => {
-        mmRuntime.current.animationRuntime.setSyllableTime(syllableTime);
-        consumeText(code);
-    }, [syllableTime]);
+        if (isEditorReady) {
+            mmRuntime.current.animationRuntime.setSyllableTime(syllableTime);
+            consumeText(code);
+        }
+    }, [syllableTime, isEditorReady]);
 
     function consumeText(newCode) {
         setCode(newCode);
@@ -215,6 +219,7 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
               }}
               onMount={(editor) => {
                 editorRef.current = editor;
+                setIsEditorReady(true);
                 consumeText(code);
                 if (lineNumbers == "off") {
                   editor.addCommand(monaco.KeyCode.Enter, () => {
