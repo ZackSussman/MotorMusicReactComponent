@@ -110,7 +110,7 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
 
     useEffect(() => {
         mmRuntime.current.animationRuntime.setSyllableTime(syllableTime);
-        consumeText(code.current);
+        consumeText(code);
     }, [syllableTime]);
 
     function consumeText(newCode) {
