@@ -114,7 +114,6 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
         console.log("syllableTime changed: ", syllableTime);
     
         if (isEditorReady) {
-            console.log("editor was ready, making the changes");
             mmRuntime.current.animationRuntime.setSyllableTime(syllableTime);
             consumeText(code);
         }
@@ -262,7 +261,20 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
               type="number"
               min={1}
               value={syllableTime}
-              onChange={e => setSyllableTime(Number(e.target.value))}
+              onChange={e => {
+                const val = e.target.value;
+                // Allow empty string for editing, but don't update state to 0
+                if (val === "") {
+                  setSyllableTime("");
+                } else {
+                  const num = Number(val);
+                  if (num >= 1) setSyllableTime(num);
+                }
+              }}
+              onBlur={e => {
+                // If left empty, reset to 1 or previous valid value
+                if (e.target.value === "") setSyllableTime(1);
+              }}
               style={{
                 width: 80,
                 fontSize: 14,
