@@ -169,7 +169,7 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
           border: '1px solid #ccc',
           borderRadius: '3px',
           boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-          overflow: 'hidden',
+          overflow: 'visible',
           display: 'flex',
           alignItems: 'stretch',
           gap: 0,
@@ -292,9 +292,21 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
                 transition: 'border 0.2s, box-shadow 0.2s',
                 fontWeight: 500,
                 letterSpacing: 0.5,
+                appearance: 'textfield',
+                MozAppearance: 'textfield',
+                WebkitAppearance: 'none',
               }}
               onFocus={e => e.target.style.border = '1.5px solid #00ffe0'}
             />
+            <style>{`
+              #dstpm-input::-webkit-outer-spin-button, #dstpm-input::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+              }
+              #dstpm-input[type=number] {
+                -moz-appearance: textfield;
+              }
+            `}</style>
             <span style={{ color: '#aaa', fontSize: 13 }}>(syllable time pulses per minute)</span>
           </div>
         )}
