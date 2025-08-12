@@ -162,7 +162,9 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
         alignItems: 'center',
         justifyContent: 'cetner',
         height: height,
-        width: '100%'}}>
+        width: '100%',
+        marginTop: 4 // reduce top margin for more space
+      }}>
         <div style = {{
           height: height,
           width,
@@ -174,7 +176,7 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
           alignItems: 'stretch',
           gap: 0,
           padding: 0,
-          margin: 0
+          margin: 0,
         }}>
           <div style = {{flex: 1, minWidth: 0}} >
             <MonacoEditor
@@ -196,8 +198,9 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
                 lineNumbers: lineNumbers,
                 renderLineHighlight: 'none',
                 scrollbar: {
-                  vertical: 'hidden',
-                  horizontal: 'hidden'
+                  vertical: 'auto',
+                  horizontal: 'hidden',
+                  alwaysConsumeMouseWheel: false
                 },
                 automaticLayout: true,
                 readOnly: areWeCurrentlyPlayingBack,
@@ -205,14 +208,14 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
                   lineNumbersMinChars: 3,
                   lineDecorationsWidth: 16,
                   padding: {
-                    top: "4px",
+                    top: 0,
                     bottom: 0,
                     left: 16,
                     right: 0
                   }
                 } : {
                   padding: {
-                    top: "4px",
+                    top: 0,
                     bottom: 0,
                     left: 0,
                     right: 0
