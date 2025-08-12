@@ -275,22 +275,25 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
               onBlur={e => {
                 // If left empty, reset to 1
                 if (e.target.value === "") setSyllableTime(1);
-                else {
-                  // Remove trailing dot or zeros
-                  setSyllableTime(Number(e.target.value));
-                }
+                else setSyllableTime(Number(e.target.value));
+                e.target.style.border = '1.5px solid #444';
               }}
               style={{
-                width: 80,
-                fontSize: 14,
-                padding: '2px 6px',
-                borderRadius: 3,
-                border: '1px solid #888',
-                background: '#fff',
-                color: '#222',
+                width: 90,
+                fontSize: 15,
+                padding: '6px 12px',
+                borderRadius: 6,
+                border: '1.5px solid #444',
+                background: '#23232b',
+                color: '#00ffe0',
                 outline: 'none',
-                marginRight: 8
+                marginRight: 12,
+                boxShadow: '0 2px 8px rgba(0,0,0,0.12)',
+                transition: 'border 0.2s, box-shadow 0.2s',
+                fontWeight: 500,
+                letterSpacing: 0.5,
               }}
+              onFocus={e => e.target.style.border = '1.5px solid #00ffe0'}
             />
             <span style={{ color: '#aaa', fontSize: 13 }}>(syllable time pulses per minute)</span>
           </div>
