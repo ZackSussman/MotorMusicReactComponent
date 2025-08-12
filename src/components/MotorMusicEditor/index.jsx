@@ -260,20 +260,25 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
               id="dstpm-input"
               type="number"
               min={1}
+              step="any"
               value={syllableTime}
               onChange={e => {
                 const val = e.target.value;
-                // Allow empty string for editing, but don't update state to 0
+                // Allow empty string for editing
                 if (val === "") {
                   setSyllableTime("");
                 } else {
                   const num = Number(val);
-                  if (num >= 1) setSyllableTime(num);
+                  if (num >= 1) setSyllableTime(val);
                 }
               }}
               onBlur={e => {
-                // If left empty, reset to 1 or previous valid value
+                // If left empty, reset to 1
                 if (e.target.value === "") setSyllableTime(1);
+                else {
+                  // Remove trailing dot or zeros
+                  setSyllableTime(Number(e.target.value));
+                }
               }}
               style={{
                 width: 80,
