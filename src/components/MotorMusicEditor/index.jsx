@@ -259,9 +259,8 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
         </div>
         { !disableDSTPMInput && (
           <div style={{ width: width, marginTop: 8, display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}>
-            <label htmlFor="dstpm-input" style={{ marginRight: 8, color: '#fff', fontSize: 14, display: 'flex', alignItems: 'center' }}>
-              DSTPM:
-              <span style={{ position: 'relative', display: 'inline-block', marginLeft: 6 }}>
+            <label htmlFor="dstpm-input" style={{ marginRight: 8, color: '#fff', fontSize: 14, display: 'flex', alignItems: 'center', padding: 0, background: 'none', border: 'none' }}>
+              <span style={{ position: 'relative', display: 'inline-block' }}>
                 <span
                   tabIndex={0}
                   style={{
@@ -277,7 +276,6 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
                     fontSize: 13,
                     border: '1.2px solid #00ffe0',
                     cursor: 'pointer',
-                    marginLeft: 2,
                     outline: 'none',
                   }}
                   onFocus={e => e.target.nextSibling.style.visibility = 'visible'}
