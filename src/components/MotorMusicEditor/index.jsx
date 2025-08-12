@@ -258,7 +258,7 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
           </button>
         </div>
         { !disableDSTPMInput && (
-          <div style={{ width: width, marginTop: 8, display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}>
+          <div style={{ width: width, marginTop: 12, display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}>
             <label htmlFor="dstpm-input" style={{ marginRight: 8, color: '#fff', fontSize: 14, display: 'flex', alignItems: 'center', padding: 0, background: 'none', border: 'none' }}>
               <span style={{ position: 'relative', display: 'inline-block' }}>
                 <span
