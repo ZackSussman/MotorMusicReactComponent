@@ -266,6 +266,7 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
               min={1}
               step="any"
               value={syllableTime}
+              disabled={areWeCurrentlyPlayingBack}
               onChange={e => {
                 const val = e.target.value;
                 // Allow empty string for editing
@@ -299,6 +300,8 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
                 appearance: 'textfield',
                 MozAppearance: 'textfield',
                 WebkitAppearance: 'none',
+                opacity: areWeCurrentlyPlayingBack ? 0.6 : 1,
+                cursor: areWeCurrentlyPlayingBack ? 'not-allowed' : 'auto',
               }}
               onFocus={e => e.target.style.border = '1.5px solid #00ffe0'}
             />
