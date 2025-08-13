@@ -85,12 +85,12 @@ function registerLanguageAndTheme(monaco) {
 }
 
 
-function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width = '600px', lineNumbers = "on", disableDSTPMInput = false, onCodeChange = (newCode) => {}}) {
+function MotorMusicEditor({initialCode = DEFAULT_CODE, onCodeChange = (newCode) => {}}, height = '100px', width = '600px', lineNumbers = "on", disableDSTPMInput = false, initialSyllableTime = DEFAULT_SYLLABLE_TIME, onSyllableTimeChange = (newTime) => {}) {
 
     const editorRef = useRef(null);
     const currentColorMap = useRef(); //TODO: understand why there is no null here (any difference?)
     const [code, setCode] = useState(initialCode);
-    const [syllableTime, setSyllableTime] = useState(DEFAULT_SYLLABLE_TIME);
+    const [syllableTime, setSyllableTime] = useState(initialSyllableTime);
     const [isCurrentCodeCompiled, setIsCurrentCodeCompiled] = useState(false);
     const [areWeCurrentlyPlayingBack, setAreWeCurrentlyPlayingBack] = useState(false);
     const [isEditorReady, setIsEditorReady] = useState(false);
@@ -112,7 +112,7 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
 
     useEffect(() => {
         console.log("syllableTime changed: ", syllableTime);
-    
+        onSyllableTimeChange(syllableTime);
         if (isEditorReady) {
             mmRuntime.current.animationRuntime.setSyllableTime(syllableTime);
             consumeText(code);
