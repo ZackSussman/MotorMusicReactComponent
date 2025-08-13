@@ -85,7 +85,7 @@ function registerLanguageAndTheme(monaco) {
 }
 
 
-function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width = '600px', lineNumbers = "on", disableDSTPMInput = false}) {
+function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width = '600px', lineNumbers = "on", disableDSTPMInput = false, onCodeChange = (newCode) => {}}) {
 
     const editorRef = useRef(null);
     const currentColorMap = useRef(); //TODO: understand why there is no null here (any difference?)
@@ -120,6 +120,7 @@ function MotorMusicEditor({initialCode = DEFAULT_CODE, height = '100px', width =
     }, [syllableTime, isEditorReady]);
 
     function consumeText(newCode) {
+        onCodeChange(newCode); //client's callback
         setCode(newCode);
         const [colorMap, getAnimationInfoFunction, computedAudio, errors] = mmRuntime.current.globalRuntime.process(newCode);
         if (errors.length === 0 && getAnimationInfoFunction && computedAudio && colorMap) {
