@@ -85,7 +85,7 @@ function registerLanguageAndTheme(monaco) {
 }
 
 
-function MotorMusicEditor({initialCode = DEFAULT_CODE, onCodeChange = (newCode) => {}}, height = '100px', width = '600px', lineNumbers = "on", disableDSTPMInput = false, initialSyllableTime = DEFAULT_SYLLABLE_TIME, onSyllableTimeChange = (newTime) => {}) {
+function MotorMusicEditor({height = '100px', width = '600px', initialCode = DEFAULT_CODE, onCodeChange = (newCode) => {},  lineNumbers = "on", disableDSTPMInput = false, initialSyllableTime = DEFAULT_SYLLABLE_TIME, onSyllableTimeChange = (newTime) => {}}) {
 
     const editorRef = useRef(null);
     const currentColorMap = useRef(); //TODO: understand why there is no null here (any difference?)
