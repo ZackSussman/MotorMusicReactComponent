@@ -61,7 +61,7 @@ function registerLanguageAndTheme(monaco) {
       { token: 'number.MotorMusic', foreground: '#0075ff' },
       { token: 'syllable.MotorMusic', foreground: '#0075ff' },
       { token: 'underscore.MotorMusic', foreground: '#0075ff' },
-      { token: 'unrecognized.MotorMusic', foreground: 'FF0000' },
+      { token: 'unrecognized.MotorMusic', foreground: '#0075ff' },
       { token: 'langle.MotorMusic', foreground: '#8080B0' },
       { token: 'rangle.MotorMusic', foreground: '#8080B0' },
       { token: 'dotp1.MotorMusic', foreground: '#1ca182', fontStyle: 'bold' },
