@@ -211,7 +211,7 @@ function MotorMusicEditor({height = '100px', width = '600px', initialCode = DEFA
                 readOnly: areWeCurrentlyPlayingBack,
                 ...(lineNumbers !== "off" ? {
                   lineNumbersMinChars: 3,
-                  lineDecorationsWidth: 16,
+                  lineDecorationsWidth: 0,
                   padding: {
                     top: 0,
                     bottom: 0,
