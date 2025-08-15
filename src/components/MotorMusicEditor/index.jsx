@@ -26,7 +26,7 @@ function registerLanguageAndTheme(monaco) {
       return;
     }
     monaco.languages.register({id: "MotorMusic"});
-    monaco.languages.setTokensProvider('MotorMusic', new MotorMusicTokensProvider());
+    //monaco.languages.setTokensProvider('MotorMusic', new MotorMusicTokensProvider());
     
     monaco.editor.defineTheme('MotorMusicTheme', {
     base: 'vs',
