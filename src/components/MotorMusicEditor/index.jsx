@@ -210,13 +210,12 @@ function MotorMusicEditor({height = '100px', width = '600px', initialCode = DEFA
                 automaticLayout: true,
                 readOnly: areWeCurrentlyPlayingBack,
                 ...(lineNumbers !== "off" ? {
-                  lineNumbersMinChars: 1,
-                  lineDecorationsWidth: 0,
-                  revealHorizontalRightPadding: 0,
+                  lineNumbersMinChars: 3,
+                  lineDecorationsWidth: 16,
                   padding: {
                     top: 0,
                     bottom: 0,
-                    left: 0,
+                    left: 8,
                     right: 0
                   }
                 } : {
