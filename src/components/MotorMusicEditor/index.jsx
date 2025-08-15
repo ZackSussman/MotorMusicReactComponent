@@ -215,7 +215,7 @@ function MotorMusicEditor({height = '100px', width = '600px', initialCode = DEFA
                   padding: {
                     top: 0,
                     bottom: 0,
-                    left: 8,
+                    left: 0,
                     right: 0
                   }
                 } : {
