@@ -70,6 +70,8 @@ function registerLanguageAndTheme(monaco) {
       { token: 'overlinep1.MotorMusic', foreground: '#1ca182', fontStyle: 'bold' },
       { token: 'overlinep2.MotorMusic', foreground: '#6b90ff', fontStyle: 'bold' },
       { token: 'overlinep0.MotorMusic', foreground: '#fe00ff', fontStyle: 'bold' },
+      { token: 'pitchSpecification.MotorMusic', foreground: '#ffffff', fontStyle: 'bold'},
+      { token: 'pitchSpecificationValue.MotorMusic', foreground: '#ffffff', fontStyle: 'bold' },
     ]
   });
 
