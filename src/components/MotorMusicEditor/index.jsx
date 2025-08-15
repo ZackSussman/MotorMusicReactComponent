@@ -210,8 +210,9 @@ function MotorMusicEditor({height = '100px', width = '600px', initialCode = DEFA
                 automaticLayout: true,
                 readOnly: areWeCurrentlyPlayingBack,
                 ...(lineNumbers !== "off" ? {
-                  lineNumbersMinChars: 3,
+                  lineNumbersMinChars: 1,
                   lineDecorationsWidth: 0,
+                  revealHorizontalRightPadding: 0,
                   padding: {
                     top: 0,
                     bottom: 0,
