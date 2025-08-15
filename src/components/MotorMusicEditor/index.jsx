@@ -341,7 +341,7 @@ function MotorMusicEditor({height = '100px', width = '600px', initialCode = DEFA
               style={{
                 width: 90,
                 fontSize: 15,
-                padding: '6px 12px',
+                padding: '6px 8px',
                 borderRadius: 6,
                 border: '1.5px solid #444',
                 background: '#23232b',
