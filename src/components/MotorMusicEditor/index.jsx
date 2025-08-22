@@ -194,11 +194,11 @@ function MotorMusicEditor({height = '100px', width = '600px', initialCode = DEFA
           return;
         }
         
-        // Get the current computed audio length
-        const currentComputedAudio = mmRuntime.current.audioRuntimeData.computedAudio;
-        
-        const targetLength = currentComputedAudio.length;
-        const croppedSamples = runtimeComputedAudio.current.slice(0, targetLength);
+    
+        const targetLength = runtimeComputedAudio.current.length;
+        let croppedSamples = runtimeComputedAudio.current;
+        if (targetLength <= runtimeComputedAudio.current.length)
+          croppedSamples = croppedSamples.slice(0, targetLength);
         
         // Log info about cropping if needed
         if (runtimeComputedAudio.current.length > targetLength) {
