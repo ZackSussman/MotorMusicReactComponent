@@ -193,6 +193,11 @@ function MotorMusicEditor({height = '100px', width = '600px', initialCode = DEFA
             setIsCurrentCodeCompiled(true);
             
             // Store the default computed audio for later use
+            console.log("first sample is " + mmRuntime.current.audioRuntime.computedAudio[0]);
+            console.log("second sample is " + mmRuntime.current.audioRuntime.computedAudio[1]);
+            console.log("third sample is " + mmRuntime.current.audioRuntime.computedAudio[2]);
+            console.log("last sample is " + mmRuntime.current.audioRuntime.computedAudio[mmRuntime.current.audioRuntime.computedAudio.length - 1]);
+            if (!runtimeComputedAudio.current)
             runtimeComputedAudio.current = mmRuntime.current.audioRuntimeData.computedAudio;
         }
         else {
