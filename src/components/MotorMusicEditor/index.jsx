@@ -93,6 +93,7 @@ function MotorMusicEditor({height = '100px', width = '600px', initialCode = DEFA
     const editorRef = useRef(null);
     const currentColorMap = useRef(); //TODO: understand why there is no null here (any difference?)
     const runtimeComputedAudio = useRef(null);
+    const fullUploadedAudio = useRef(null);
     const [code, setCode] = useState(initialCode);
     const [syllableTime, setSyllableTime] = useState(initialSyllableTime);
     const [isCurrentCodeCompiled, setIsCurrentCodeCompiled] = useState(false);
@@ -173,8 +174,8 @@ function MotorMusicEditor({height = '100px', width = '600px', initialCode = DEFA
             }
             
             // Store the full uploaded audio for later re-cropping
-            runtimeComputedAudio.current = chunkedSamples;
-            
+            fullUploadedAudio.current = chunkedSamples;
+
             // Log warning if sample rate is not 48000 (assumed by MotorMusic runtime)
             if (sampleRate !== 48000) {
                 console.warn(`Audio sample rate is ${sampleRate}Hz, but MotorMusic runtime assumes 48000Hz. This may cause timing issues.`);
@@ -196,7 +197,7 @@ function MotorMusicEditor({height = '100px', width = '600px', initialCode = DEFA
         
     
         const targetLength = runtimeComputedAudio.current.length;
-        let croppedSamples = mmRuntime.current.audioRuntimeData.computedAudio;
+        let croppedSamples = fullUploadedAudio.current;
         if (targetLength <= croppedSamples.length)
           croppedSamples = croppedSamples.slice(0, targetLength);
         
