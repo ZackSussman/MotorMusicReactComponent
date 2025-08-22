@@ -88,10 +88,11 @@ function registerLanguageAndTheme(monaco) {
 }
 
 
-function MotorMusicEditor({height = '100px', width = '600px', initialCode = DEFAULT_CODE, onCodeChange = (newCode) => {},  lineNumbers = "on", disableDSTPMInput = false, initialSyllableTime = DEFAULT_SYLLABLE_TIME, onSyllableTimeChange = (newTime) => {}}) {
+function MotorMusicEditor({height = '100px', width = '600px', initialCode = DEFAULT_CODE, onCodeChange = (newCode) => {},  lineNumbers = "on", disableDSTPMInput = false, initialSyllableTime = DEFAULT_SYLLABLE_TIME, onSyllableTimeChange = (newTime) => {}, audioData}) {
 
     const editorRef = useRef(null);
     const currentColorMap = useRef(); //TODO: understand why there is no null here (any difference?)
+    const runtimeComputedAudio = useRef(null);
     const [code, setCode] = useState(initialCode);
     const [syllableTime, setSyllableTime] = useState(initialSyllableTime);
     const [isCurrentCodeCompiled, setIsCurrentCodeCompiled] = useState(false);
@@ -122,6 +123,61 @@ function MotorMusicEditor({height = '100px', width = '600px', initialCode = DEFA
         }
     }, [syllableTime, isEditorReady]);
 
+    useEffect(() => {
+        if (audioData === undefined) {
+            // No change needed when audioData is undefined initially
+            return;
+        }
+        
+        if (audioData === null) {
+            // Audio was removed, revert to default computed audio
+            if (runtimeComputedAudio.current) {
+                mmRuntime.current.audioRuntime.setComputedAudio(runtimeComputedAudio.current);
+            }
+        } else {
+            // Audio was uploaded, process it
+            processAudioData(audioData);
+        }
+    }, [audioData]);
+
+    async function processAudioData(audioData) {
+        try {
+            // Convert data URL to ArrayBuffer
+            const response = await fetch(audioData.dataUrl);
+            const arrayBuffer = await response.arrayBuffer();
+            
+            // Create audio context for decoding
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+            
+            // Convert to the required format: [[left1, right1], [left2, right2], ...]
+            const sampleRate = audioBuffer.sampleRate;
+            const length = audioBuffer.length;
+            const numberOfChannels = audioBuffer.numberOfChannels;
+            
+            // Get channel data
+            const leftChannel = audioBuffer.getChannelData(0);
+            const rightChannel = numberOfChannels > 1 ? audioBuffer.getChannelData(1) : leftChannel;
+            
+            // Convert to stereo interleaved format
+            const stereoSamples = [];
+            for (let i = 0; i < length; i++) {
+                stereoSamples.push([leftChannel[i], rightChannel[i]]);
+            }
+            
+            // Log warning if sample rate is not 48000 (assumed by MotorMusic runtime)
+            if (sampleRate !== 48000) {
+                console.warn(`Audio sample rate is ${sampleRate}Hz, but MotorMusic runtime assumes 48000Hz. This may cause timing issues.`);
+            }
+            
+            // Set the processed audio in the runtime
+            mmRuntime.current.audioRuntime.setComputedAudio(stereoSamples);
+            
+        } catch (error) {
+            console.error("Error processing audio data:", error);
+        }
+    }
+
     function consumeText(newCode) {
         onCodeChange(newCode); //client's callback
         setCode(newCode);
@@ -132,6 +188,9 @@ function MotorMusicEditor({height = '100px', width = '600px', initialCode = DEFA
             mmRuntime.current.animationRuntime.repaintColors(editorRef.current, document, colorMap);
             currentColorMap.current = colorMap;
             setIsCurrentCodeCompiled(true);
+            
+            // Store the default computed audio for later use
+            runtimeComputedAudio.current = mmRuntime.audioRuntimeData.computedAudio;
         }
         else {
             setIsCurrentCodeCompiled(false); 
