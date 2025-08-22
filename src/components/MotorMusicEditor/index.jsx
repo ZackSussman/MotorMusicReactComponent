@@ -189,7 +189,9 @@ function MotorMusicEditor({height = '100px', width = '600px', initialCode = DEFA
         setCode(newCode);
         const [colorMap, getAnimationInfoFunction, computedAudio, errors] = mmRuntime.current.globalRuntime.process(newCode);
         if (errors.length === 0 && getAnimationInfoFunction && computedAudio && colorMap) {
-            mmRuntime.current.audioRuntime.setComputedAudio(computedAudio);
+
+            if (audioData === undefined || audioData === null) {
+               mmRuntime.current.audioRuntime.setComputedAudio(computedAudio);
             mmRuntime.current.animationRuntime.setGetAnimationInfoFunction(getAnimationInfoFunction);
             mmRuntime.current.animationRuntime.repaintColors(editorRef.current, document, colorMap);
             currentColorMap.current = colorMap;
@@ -197,7 +199,7 @@ function MotorMusicEditor({height = '100px', width = '600px', initialCode = DEFA
             
             // Store the default computed audio for later use
             if (!runtimeComputedAudio.current)
-            runtimeComputedAudio.current = mmRuntime.current.audioRuntimeData.computedAudio;
+              runtimeComputedAudio.current = mmRuntime.current.audioRuntimeData.computedAudio;
         }
         else {
             setIsCurrentCodeCompiled(false); 
