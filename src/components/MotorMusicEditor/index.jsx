@@ -219,6 +219,7 @@ function MotorMusicEditor({height = '100px', width = '600px', initialCode = DEFA
                mmRuntime.current.audioRuntime.setComputedAudio(computedAudio);
             }
             else {
+
               // Re-crop uploaded audio to match the new computed audio length
               cropAndSetUploadedAudio();
             }
@@ -226,10 +227,7 @@ function MotorMusicEditor({height = '100px', width = '600px', initialCode = DEFA
             mmRuntime.current.animationRuntime.repaintColors(editorRef.current, document, colorMap);
             currentColorMap.current = colorMap;
             setIsCurrentCodeCompiled(true);
-            
-            // Store the default computed audio for later use
-            if (!runtimeComputedAudio.current)
-              runtimeComputedAudio.current = mmRuntime.current.audioRuntimeData.computedAudio;
+            runtimeComputedAudio.current = computedAudio;
         }
         else {
             setIsCurrentCodeCompiled(false); 
