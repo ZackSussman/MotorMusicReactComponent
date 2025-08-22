@@ -196,8 +196,8 @@ function MotorMusicEditor({height = '100px', width = '600px', initialCode = DEFA
         
     
         const targetLength = runtimeComputedAudio.current.length;
-        let croppedSamples = runtimeComputedAudio.current;
-        if (targetLength <= runtimeComputedAudio.current.length)
+        let croppedSamples = audioRuntime.current.audioRuntimeData.computedAudio;
+        if (targetLength <= croppedSamples.length)
           croppedSamples = croppedSamples.slice(0, targetLength);
         
         // Log info about cropping if needed
