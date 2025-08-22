@@ -172,12 +172,23 @@ function MotorMusicEditor({height = '100px', width = '600px', initialCode = DEFA
                 chunkedSamples.push(chunk);
             }
             
+            // Crop to match the length of the original computed audio
+            const originalComputedAudio = mmRuntime.current.audioRuntimeData.computedAudio;
+            const originalNumBuffers = originalComputedAudio.length;
+            const croppedSamples = chunkedSamples.slice(0, originalNumBuffers);
+
             // Log warning if sample rate is not 48000 (assumed by MotorMusic runtime)
             if (sampleRate !== 48000) {
                 console.warn(`Audio sample rate is ${sampleRate}Hz, but MotorMusic runtime assumes 48000Hz. This may cause timing issues.`);
             }
+            
+            // Log info about cropping if needed
+            if (chunkedSamples.length > originalLength) {
+                console.log(`Cropped uploaded audio from ${chunkedSamples.length} buffers to ${originalLength} buffers to match computed audio length.`);
+            }
+            
             // Set the processed audio in the runtime
-            mmRuntime.current.audioRuntime.setComputedAudio(chunkedSamples);
+            mmRuntime.current.audioRuntime.setComputedAudio(croppedSamples);
             
         } catch (error) {
             console.error("Error processing audio data:", error);
