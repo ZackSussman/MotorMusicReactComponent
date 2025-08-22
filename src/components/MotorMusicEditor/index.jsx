@@ -172,27 +172,41 @@ function MotorMusicEditor({height = '100px', width = '600px', initialCode = DEFA
                 chunkedSamples.push(chunk);
             }
             
-            // Crop to match the length of the original computed audio
-            const originalComputedAudio = mmRuntime.current.audioRuntimeData.computedAudio;
-            const originalNumBuffers = originalComputedAudio.length;
-            const croppedSamples = chunkedSamples.slice(0, originalNumBuffers);
-
+            // Store the full uploaded audio for later re-cropping
+            runtimeComputedAudio.current = chunkedSamples;
+            
             // Log warning if sample rate is not 48000 (assumed by MotorMusic runtime)
             if (sampleRate !== 48000) {
                 console.warn(`Audio sample rate is ${sampleRate}Hz, but MotorMusic runtime assumes 48000Hz. This may cause timing issues.`);
             }
             
-            // Log info about cropping if needed
-            if (chunkedSamples.length > originalLength) {
-                console.log(`Cropped uploaded audio from ${chunkedSamples.length} buffers to ${originalLength} buffers to match computed audio length.`);
-            }
-            
-            // Set the processed audio in the runtime
-            mmRuntime.current.audioRuntime.setComputedAudio(croppedSamples);
+            // Crop and set the audio if we have computed audio to match against
+            cropAndSetUploadedAudio();
             
         } catch (error) {
             console.error("Error processing audio data:", error);
         }
+    }
+
+    function cropAndSetUploadedAudio() {
+        if (!runtimeComputedAudio.current) {
+          console.warn("No uploaded audio data available to crop. Why were we even called lol");
+          return;
+        }
+        
+        // Get the current computed audio length
+        const currentComputedAudio = mmRuntime.current.audioRuntimeData.computedAudio;
+        
+        const targetLength = currentComputedAudio.length;
+        const croppedSamples = runtimeComputedAudio.current.slice(0, targetLength);
+        
+        // Log info about cropping if needed
+        if (runtimeComputedAudio.current.length > targetLength) {
+            console.log(`Cropped uploaded audio from ${runtimeComputedAudio.current.length} buffers to ${targetLength} buffers to match computed audio length.`);
+        }
+        
+        // Set the cropped audio in the runtime
+        mmRuntime.current.audioRuntime.setComputedAudio(croppedSamples);
     }
 
     function consumeText(newCode) {
@@ -202,6 +216,10 @@ function MotorMusicEditor({height = '100px', width = '600px', initialCode = DEFA
         if (errors.length === 0 && getAnimationInfoFunction && computedAudio && colorMap) {
             if (audioData === undefined || audioData === null) {
                mmRuntime.current.audioRuntime.setComputedAudio(computedAudio);
+            }
+            else {
+              // Re-crop uploaded audio to match the new computed audio length
+              cropAndSetUploadedAudio();
             }
             mmRuntime.current.animationRuntime.setGetAnimationInfoFunction(getAnimationInfoFunction);
             mmRuntime.current.animationRuntime.repaintColors(editorRef.current, document, colorMap);
