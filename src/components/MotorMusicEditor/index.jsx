@@ -190,7 +190,7 @@ function MotorMusicEditor({height = '100px', width = '600px', initialCode = DEFA
             setIsCurrentCodeCompiled(true);
             
             // Store the default computed audio for later use
-            runtimeComputedAudio.current = mmRuntime.audioRuntimeData.computedAudio;
+            runtimeComputedAudio.current = mmRuntime.current.audioRuntimeData.computedAudio;
         }
         else {
             setIsCurrentCodeCompiled(false); 
