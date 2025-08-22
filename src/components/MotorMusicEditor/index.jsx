@@ -169,7 +169,10 @@ function MotorMusicEditor({height = '100px', width = '600px', initialCode = DEFA
             if (sampleRate !== 48000) {
                 console.warn(`Audio sample rate is ${sampleRate}Hz, but MotorMusic runtime assumes 48000Hz. This may cause timing issues.`);
             }
-            
+            console.log("the first sample is " + stereoSamples[0]);
+            console.log("the second sample is " + stereoSamples[1]);
+            console.log("the third sample is " + stereoSamples[2]);
+            console.log("the last sample is " + stereoSamples[stereoSamples.length - 1]);
             // Set the processed audio in the runtime
             mmRuntime.current.audioRuntime.setComputedAudio(stereoSamples);
             
