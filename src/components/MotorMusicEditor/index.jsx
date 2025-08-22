@@ -165,16 +165,19 @@ function MotorMusicEditor({height = '100px', width = '600px', initialCode = DEFA
                 stereoSamples.push([leftChannel[i], rightChannel[i]]);
             }
             
+            // Buffer into chunks of 128 samples
+            const chunkedSamples = [];
+            for (let i = 0; i < stereoSamples.length; i += 128) {
+                const chunk = stereoSamples.slice(i, i + 128);
+                chunkedSamples.push(chunk);
+            }
+            
             // Log warning if sample rate is not 48000 (assumed by MotorMusic runtime)
             if (sampleRate !== 48000) {
                 console.warn(`Audio sample rate is ${sampleRate}Hz, but MotorMusic runtime assumes 48000Hz. This may cause timing issues.`);
             }
-            console.log("the first sample is " + stereoSamples[0]);
-            console.log("the second sample is " + stereoSamples[1]);
-            console.log("the third sample is " + stereoSamples[2]);
-            console.log("the last sample is " + stereoSamples[stereoSamples.length - 1]);
             // Set the processed audio in the runtime
-            mmRuntime.current.audioRuntime.setComputedAudio(stereoSamples);
+            mmRuntime.current.audioRuntime.setComputedAudio(chunkedSamples);
             
         } catch (error) {
             console.error("Error processing audio data:", error);
@@ -193,10 +196,6 @@ function MotorMusicEditor({height = '100px', width = '600px', initialCode = DEFA
             setIsCurrentCodeCompiled(true);
             
             // Store the default computed audio for later use
-            console.log("first sample is " + computedAudio[0]);
-            console.log("second sample is " + computedAudio[1]);
-            console.log("third sample is " + computedAudio[2]);
-            console.log("last sample is " + computedAudio[computedAudio.length - 1]);
             if (!runtimeComputedAudio.current)
             runtimeComputedAudio.current = mmRuntime.current.audioRuntimeData.computedAudio;
         }
