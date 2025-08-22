@@ -88,7 +88,7 @@ function registerLanguageAndTheme(monaco) {
 }
 
 
-function MotorMusicEditor({height = '100px', width = '600px', initialCode = DEFAULT_CODE, onCodeChange = (newCode) => {},  lineNumbers = "on", disableDSTPMInput = false, initialSyllableTime = DEFAULT_SYLLABLE_TIME, onSyllableTimeChange = (newTime) => {}, audioData}) {
+function MotorMusicEditor({height = '100px', width = '600px', initialCode = DEFAULT_CODE, onCodeChange = (newCode) => {},  lineNumbers = "on", disableDSTPMInput = false, initialSyllableTime = DEFAULT_SYLLABLE_TIME, onSyllableTimeChange = (newTime) => {}, audioData, setClientPlaybackState = () => {}}) {
 
     const editorRef = useRef(null);
     const currentColorMap = useRef(); //TODO: understand why there is no null here (any difference?)
@@ -99,7 +99,7 @@ function MotorMusicEditor({height = '100px', width = '600px', initialCode = DEFA
     const [areWeCurrentlyPlayingBack, setAreWeCurrentlyPlayingBack] = useState(false);
     const [isEditorReady, setIsEditorReady] = useState(false);
 
-     const mmRuntime = useRef(initializeMotorMusicRuntime(() => {setAreWeCurrentlyPlayingBack(true)}, () => {setAreWeCurrentlyPlayingBack(false)}));
+     const mmRuntime = useRef(initializeMotorMusicRuntime(() => {setAreWeCurrentlyPlayingBack(true); setClientPlaybackState(true);}, () => {setAreWeCurrentlyPlayingBack(false); setClientPlaybackState(false);}));
 
 
     useEffect(() => {
