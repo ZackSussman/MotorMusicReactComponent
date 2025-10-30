@@ -428,7 +428,8 @@ function MotorMusicEditor({height = '100px', width = '600px', initialCode = DEFA
                   setSyllableTime("");
                 } else {
                   const num = Number(val);
-                  if (num >= 1) setSyllableTime(val);
+
+                  if((num >= 1)  && (num <= 2000)) setSyllableTime(val);
                 }
               }}
               onBlur={e => {
