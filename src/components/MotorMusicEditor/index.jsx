@@ -212,25 +212,32 @@ function MotorMusicEditor({height = '100px', width = '600px', initialCode = DEFA
         // Set the cropped audio in the runtime
         mmRuntime.current.audioRuntime.setComputedAudio(croppedSamples);
     }
+    
+    function updateAudio() {
+      const [computedAudio, errors] = mmRuntime.current.globalRuntime.processAudio(code);
+      if (errors.length === 0 && computedAudio) {
+          if (audioData === undefined || audioData === null) {
+            mmRuntime.current.audioRuntime.setComputedAudio(computedAudio);
+            runtimeComputedAudio.current = computedAudio
+          }
+          else {
+             // Re-crop uploaded audio to match the new computed audio length
+             cropAndSetUploadedAudio();
+          }
+
+      }
+
+    }
 
     function consumeText(newCode) {
         onCodeChange(newCode); //client's callback
         setCode(newCode);
-        const [colorMap, getAnimationInfoFunction, computedAudio, errors] = mmRuntime.current.globalRuntime.process(newCode);
-        if (errors.length === 0 && getAnimationInfoFunction && computedAudio && colorMap) {
-            if (audioData === undefined || audioData === null) {
-               mmRuntime.current.audioRuntime.setComputedAudio(computedAudio);
-            }
-            else {
-
-              // Re-crop uploaded audio to match the new computed audio length
-              cropAndSetUploadedAudio();
-            }
+        const [colorMap, getAnimationInfoFunction, errors] = mmRuntime.current.globalRuntime.processVisual(newCode);
+        if (errors.length === 0 && getAnimationInfoFunction && colorMap) {
             mmRuntime.current.animationRuntime.setGetAnimationInfoFunction(getAnimationInfoFunction);
             mmRuntime.current.animationRuntime.repaintColors(editorRef.current, document, colorMap);
             currentColorMap.current = colorMap;
             setIsCurrentCodeCompiled(true);
-            runtimeComputedAudio.current = computedAudio;
         }
         else {
             setIsCurrentCodeCompiled(false); 
@@ -253,6 +260,7 @@ function MotorMusicEditor({height = '100px', width = '600px', initialCode = DEFA
 
     async function runCode() {
         if (isCurrentCodeCompiled && !areWeCurrentlyPlayingBack) {
+            updateAudio();
             const audioStartTime = await mmRuntime.current.audioRuntime.beginNewPlayback();
             mmRuntime.current.animationRuntime.initiateAnimation(editorRef.current, document, currentColorMap.current, audioStartTime);
         }
