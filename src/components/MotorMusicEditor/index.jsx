@@ -289,7 +289,7 @@ function MotorMusicEditor({fontSize = 18, height = '100px', width = '600px', ini
           padding: 0,
           margin: 0,
         }}>
-          <div style = {{flex: 1, minWidth: 0}} >
+          <div style = {{flex: 1, minWidth: 0, maxWidth: '100%', overflow: 'hidden'}} >
             <MonacoEditor
               language="MotorMusic"
               value={code}
