@@ -312,7 +312,7 @@ function MotorMusicEditor({fontSize = 18, height = '100px', width = '600px', ini
                 accessibilitySupport: "off",
                 scrollbar: {
                   vertical: 'auto',
-                  horizontal: 'auto',
+                  horizontal: 'hidden',
                   alwaysConsumeMouseWheel: false
                 },
                 automaticLayout: true,
@@ -335,7 +335,7 @@ function MotorMusicEditor({fontSize = 18, height = '100px', width = '600px', ini
                     top: 0,
                     bottom: 0,
                     left: 0,
-                    right: 0
+                    right: 8
                   }
                 })
               }}
