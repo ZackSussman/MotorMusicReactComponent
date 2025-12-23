@@ -88,7 +88,7 @@ function registerLanguageAndTheme(monaco) {
 }
 
 
-function MotorMusicEditor({fontSize = 18, height = '100px', width = '600px', initialCode = DEFAULT_CODE, onCodeChange = (newCode) => {},  lineNumbers = "on", disableDSTPMInput = false, initialSyllableTime = DEFAULT_SYLLABLE_TIME, onSyllableTimeChange = (newTime) => {}, audioData, setClientPlaybackState = () => {}}) {
+function MotorMusicEditor({fontSize = 18, height = '100px', width = '600px', initialCode = DEFAULT_CODE, onCodeChange = (newCode) => {},  lineNumbers = "on", disableDSTPMInput = false, initialSyllableTime = DEFAULT_SYLLABLE_TIME, onSyllableTimeChange = (newTime) => {}, audioData, setClientPlaybackState = () => {}, playButtonScale = 1}) {
 
     const editorRef = useRef(null);
     const currentColorMap = useRef(); //TODO: understand why there is no null here (any difference?)
@@ -370,7 +370,7 @@ function MotorMusicEditor({fontSize = 18, height = '100px', width = '600px', ini
               borderRadius: 0
             }}
           >
-            <FaPlay style={{ color: (!isCurrentCodeCompiled || areWeCurrentlyPlayingBack) ? '#888' : '#fff' }} />
+            <FaPlay style={{ color: (!isCurrentCodeCompiled || areWeCurrentlyPlayingBack) ? '#888' : '#fff', transform: `scale(${playButtonScale})` }} />
           </button>
         </div>
         { !disableDSTPMInput && (
