@@ -88,7 +88,7 @@ function registerLanguageAndTheme(monaco) {
 }
 
 
-function MotorMusicEditor({height = '100px', width = '600px', initialCode = DEFAULT_CODE, onCodeChange = (newCode) => {},  lineNumbers = "on", disableDSTPMInput = false, initialSyllableTime = DEFAULT_SYLLABLE_TIME, onSyllableTimeChange = (newTime) => {}, audioData, setClientPlaybackState = () => {}}) {
+function MotorMusicEditor({fontSize = 18, height = '100px', width = '600px', initialCode = DEFAULT_CODE, onCodeChange = (newCode) => {},  lineNumbers = "on", disableDSTPMInput = false, initialSyllableTime = DEFAULT_SYLLABLE_TIME, onSyllableTimeChange = (newTime) => {}, audioData, setClientPlaybackState = () => {}}) {
 
     const editorRef = useRef(null);
     const currentColorMap = useRef(); //TODO: understand why there is no null here (any difference?)
@@ -298,7 +298,7 @@ function MotorMusicEditor({height = '100px', width = '600px', initialCode = DEFA
               options={{
                 overviewRulerLanes: 0,
                 automaticLayout: true,
-                fontSize: 18,
+                fontSize: fontSize,
                 minimap: { enabled: false },
                 matchBrackets: "near",
                 bracketPairColorization: { enabled: false },
@@ -315,6 +315,10 @@ function MotorMusicEditor({height = '100px', width = '600px', initialCode = DEFA
                   alwaysConsumeMouseWheel: false
                 },
                 automaticLayout: true,
+                quickSuggestions: false,
+                suggest: {enabled: false},
+                parameterHints: {enabled: false},
+                hover: {enabled: false},
                 readOnly: areWeCurrentlyPlayingBack,
                 ...(lineNumbers !== "off" ? {
                   lineNumbersMinChars: 3,
