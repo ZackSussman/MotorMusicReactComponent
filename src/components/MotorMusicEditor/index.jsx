@@ -309,6 +309,7 @@ function MotorMusicEditor({fontSize = 18, height = '100px', width = '600px', ini
                 lineNumbers: lineNumbers,
                 renderLineHighlight: 'none',
                 stickyScroll: { enabled: false },
+                accessibilitySupport: "off",
                 scrollbar: {
                   vertical: 'auto',
                   horizontal: 'hidden',
