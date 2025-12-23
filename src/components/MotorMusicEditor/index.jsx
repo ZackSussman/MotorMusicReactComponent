@@ -282,7 +282,7 @@ function MotorMusicEditor({fontSize = 18, height = '100px', width = '600px', ini
           border: '1px solid #ccc',
           borderRadius: '3px',
           boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-          overflow: 'visible',
+          overflow: 'hidden',
           display: 'flex',
           alignItems: 'stretch',
           gap: 0,
@@ -312,7 +312,7 @@ function MotorMusicEditor({fontSize = 18, height = '100px', width = '600px', ini
                 accessibilitySupport: "off",
                 scrollbar: {
                   vertical: 'auto',
-                  horizontal: 'hidden',
+                  horizontal: 'auto',
                   alwaysConsumeMouseWheel: false
                 },
                 automaticLayout: true,
