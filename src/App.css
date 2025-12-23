@@ -42,8 +42,6 @@
 }
 
 
-.monaco-editor .view-lines {
-  padding-top: 6px;
-  padding-bottom: 6px;
-  line-height: 24px;
+.monaco-editor textarea.iPadShowKeyboard {
+  display: none !important;
 }
