@@ -87,8 +87,9 @@ function registerLanguageAndTheme(monaco) {
 
 }
 
+//width used to default to 600px
 
-function MotorMusicEditor({fontSize = 18, height = '100px', width = '600px', initialCode = DEFAULT_CODE, onCodeChange = (newCode) => {},  lineNumbers = "on", disableDSTPMInput = false, initialSyllableTime = DEFAULT_SYLLABLE_TIME, onSyllableTimeChange = (newTime) => {}, audioData, setClientPlaybackState = () => {}, playButtonScale = 1}) {
+function MotorMusicEditor({fontSize = 18, height = '100px', initialCode = DEFAULT_CODE, onCodeChange = (newCode) => {},  lineNumbers = "on", disableDSTPMInput = false, initialSyllableTime = DEFAULT_SYLLABLE_TIME, onSyllableTimeChange = (newTime) => {}, audioData, setClientPlaybackState = () => {}, playButtonScale = 1}) {
 
     const editorRef = useRef(null);
     const currentColorMap = useRef(); //TODO: understand why there is no null here (any difference?)
@@ -278,7 +279,7 @@ function MotorMusicEditor({fontSize = 18, height = '100px', width = '600px', ini
       }}>
         <div style = {{
           height: height,
-          width,
+          width: '100%',
           border: '1px solid #ccc',
           borderRadius: '3px',
           boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
@@ -374,7 +375,7 @@ function MotorMusicEditor({fontSize = 18, height = '100px', width = '600px', ini
           </button>
         </div>
         { !disableDSTPMInput && (
-          <div style={{ width: width, marginTop: 12, display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}>
+          <div style={{ width: '100%', marginTop: 12, display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}>
             <label htmlFor="dstpm-input" style={{ marginRight: 8, color: '#fff', fontSize: 14, display: 'flex', alignItems: 'center', padding: 0, background: 'none', border: 'none' }}>
               <span style={{ position: 'relative', display: 'inline-block' }}>
                 <span
