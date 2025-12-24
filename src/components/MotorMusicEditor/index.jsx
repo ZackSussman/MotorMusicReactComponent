@@ -285,6 +285,9 @@ function MotorMusicEditor({fontSize = 18, height = '100px', initialCode = DEFAUL
         <div style = {{
           height: height,
           width: '100%',
+          maxWidth: '100%',
+          minWidth: 0,
+          boxSizing: 'border-box',
           border: '1px solid #ccc',
           borderRadius: '3px',
           boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
