@@ -268,14 +268,19 @@ function MotorMusicEditor({fontSize = 18, height = '100px', initialCode = DEFAUL
     }
 
     return (
-      <div style={{
+      <div className="mm-editor-shell"
+       style={{
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'cetner',
         height: height,
         width: '100%',
-        marginTop: 4 // reduce top margin for more space
+        marginTop: 4, // reduce top margin for more space
+        minWidth: 0,
+        maxWidth: '100%',
+        overflow: 'hidden',
+        boxSizing: 'border-box'
       }}>
         <div style = {{
           height: height,
