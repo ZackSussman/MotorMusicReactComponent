@@ -100,6 +100,7 @@ function MotorMusicEditor({fontSize = 18, height = '100px', initialCode = DEFAUL
     const [isCurrentCodeCompiled, setIsCurrentCodeCompiled] = useState(false);
     const [areWeCurrentlyPlayingBack, setAreWeCurrentlyPlayingBack] = useState(false);
     const [isEditorReady, setIsEditorReady] = useState(false);
+    const [hasHorizontalOverflow, setHasHorizontalOverflow] = useState(false);
 
      const mmRuntime = useRef(initializeMotorMusicRuntime(() => {setAreWeCurrentlyPlayingBack(true); setClientPlaybackState(true);}, () => {setAreWeCurrentlyPlayingBack(false); setClientPlaybackState(false);}));
 
@@ -298,7 +299,7 @@ function MotorMusicEditor({fontSize = 18, height = '100px', initialCode = DEFAUL
           padding: 0,
           margin: 0,
         }}>
-          <div style = {{flex: 1, minWidth: 0, maxWidth: '100%', overflow: 'hidden'}} >
+          <div style = {{flex: 1, minWidth: 0, maxWidth: '100%', overflow: 'hidden', position: 'relative'}} >
             <MonacoEditor
               language="MotorMusic"
               value={code}
@@ -357,9 +358,39 @@ function MotorMusicEditor({fontSize = 18, height = '100px', initialCode = DEFAUL
                     // Do nothing on Enter key — disables new line
                   });
                 }
+                
+                // Check for horizontal overflow
+                const checkOverflow = () => {
+                  const domNode = editor.getDomNode();
+                  if (domNode) {
+                    const viewLines = domNode.querySelector('.view-lines');
+                    if (viewLines) {
+                      const hasOverflow = viewLines.scrollWidth > viewLines.clientWidth;
+                      setHasHorizontalOverflow(hasOverflow);
+                    }
+                  }
+                };
+                
+                // Check on mount and when content changes
+                checkOverflow();
+                editor.onDidChangeModelContent(() => {
+                  setTimeout(checkOverflow, 100);
+                });
               }}
               onChange={consumeText}
             />
+            {hasHorizontalOverflow && (
+              <div style={{
+                position: 'absolute',
+                right: 0,
+                top: 0,
+                bottom: 0,
+                width: '30px',
+                background: 'linear-gradient(to left, rgba(23, 22, 23, 0.8), transparent)',
+                pointerEvents: 'none',
+                zIndex: 10
+              }} />
+            )}
           </div>
           <button
             disabled={!isCurrentCodeCompiled || areWeCurrentlyPlayingBack}
