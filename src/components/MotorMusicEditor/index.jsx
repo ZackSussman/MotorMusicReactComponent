@@ -385,8 +385,8 @@ function MotorMusicEditor({fontSize = 18, height = '100px', initialCode = DEFAUL
                 right: 0,
                 top: 0,
                 bottom: 0,
-                width: '30px',
-                background: 'linear-gradient(to left, rgba(23, 22, 23, 0.8), transparent)',
+                width: '40px',
+                background: 'linear-gradient(to left, rgba(23, 22, 23, 0.95), rgba(23, 22, 23, 0.6), transparent)',
                 pointerEvents: 'none',
                 zIndex: 10
               }} />
